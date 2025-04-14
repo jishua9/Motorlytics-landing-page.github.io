@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 annualLabel.classList.add('active');
                 saveBadge.style.display = 'inline';
                 
-                if (amateurPrice) amateurPrice.innerHTML = '$7.20<span>/month</span>';
-                if (proPrice) proPrice.innerHTML = '$23.20<span>/month</span>';
-                if (teamPrice) teamPrice.innerHTML = '$63.20<span>/month</span>';
+                if (amateurPrice) amateurPrice.innerHTML = 'FREE<span>/month</span>';
+                if (proPrice) proPrice.innerHTML = '$12<span>/month</span>';
+                if (teamPrice) teamPrice.innerHTML = '$24<span>/month</span>';
                 
                 if (amateurDescription) amateurDescription.textContent = 'Billed annually';
                 if (proDescription) proDescription.textContent = 'Billed annually';
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 annualLabel.classList.remove('active');
                 saveBadge.style.display = 'none';
                 
-                if (amateurPrice) amateurPrice.innerHTML = '$9<span>/month</span>';
-                if (proPrice) proPrice.innerHTML = '$29<span>/month</span>';
-                if (teamPrice) teamPrice.innerHTML = '$79<span>/month</span>';
+                if (amateurPrice) amateurPrice.innerHTML = 'FREE<span>/month</span>';
+                if (proPrice) proPrice.innerHTML = '$15<span>/month</span>';
+                if (teamPrice) teamPrice.innerHTML = '$30<span>/month</span>';
                 
                 if (amateurDescription) amateurDescription.textContent = 'Billed monthly';
                 if (proDescription) proDescription.textContent = 'Billed monthly';
