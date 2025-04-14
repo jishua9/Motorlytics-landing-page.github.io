@@ -946,6 +946,7 @@ footer {
     color: var(--color-primary);
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
+    text-decoration: none;
 }
 
 .cta-button a{
@@ -1002,4 +1003,8 @@ footer {
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
-} 
+}
+
+.center-btn{
+    text-decoration: none;
+}
