@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorlytics - Pricing | Racing Performance Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="images/Logo.svg" alt="Motorlytics Logo" class="logo-image">
+                <span class="logo-text">Motorlytics</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html" style="color: var(--color-primary);">Pricing</a>
+                <a href="about.html">About</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Simple, <span>Transparent</span> Pricing</h1>
+            <p>Choose the plan that best suits your racing needs. No hidden fees or long-term commitments required.</p>
+            
+            <div class="interval-toggle">
+                <span class="interval-label active" id="monthly-label">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="interval-label" id="annual-label">Annual <span class="save-badge" id="save-badge">Save 20%</span></span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Amateur</h3>
+                        <p>Perfect for club racers</p>
+                        <div class="price" id="amateur-price">FREE<span>/month</span></div>
+                        <p class="price-description" id="amateur-description">Billed monthly</p>
+                        <p class="annual-savings" id="amateur-savings">Save $0 per year</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li class="highlighted">Single driver account</li>
+                            <li class="highlighted">One vehicle profile</li>
+                            <li class="highlighted">Basic maintenance tracking</li>
+                            <li class="highlighted">Event calendar</li>
+                            <li>Basic weather forecasts</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="secondary-button">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <p>For serious competitors</p>
+                        <div class="price" id="pro-price">$15<span>/month</span></div>
+                        <p class="price-description" id="pro-description">Billed monthly</p>
+                        <p class="annual-savings" id="pro-savings">Save $36 per year</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li class="highlighted">Single driver account</li>
+                            <li class="highlighted">Multiple vehicle profiles</li>
+                            <li class="highlighted">Advanced part tracking</li>
+                            <li class="highlighted">Full service history</li>
+                            <li class="highlighted">Detailed lap analytics</li>
+                            <li>Customizable setup templates</li>
+                            <li>Setup comparison tools</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="secondary-button">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Team</h3>
+                        <p>For professional race teams</p>
+                        <div class="price" id="team-price">$30<span>/month</span></div>
+                        <p class="price-description" id="team-description">Billed monthly</p>
+                        <p class="annual-savings" id="team-savings">Save $72 per year</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li class="highlighted">Multiple driver accounts</li>
+                            <li class="highlighted">Unlimited vehicle profiles</li>
+                            <li class="highlighted">Team management dashboard</li>
+                            <li class="highlighted">Advanced part tracking</li>
+                            <li>Full service history</li>
+                            <li>Detailed lap analytics</li>
+                            <li>Customizable setup templates</li>
+                            <li>Custom Driver reports</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="secondary-button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Feature Comparison</h2>
+                <p>See exactly what's included in each plan to help you make the right choice for your racing needs.</p>
+            </div>
+            
+            <div class="table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="plan-column">Amateur</th>
+                            <th class="plan-column">Pro</th>
+                            <th class="plan-column">Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="feature-group-header">
+                            <td colspan="4">User Management</td>
+                        </tr>
+                        <tr>
+                            <td>Number of driver accounts</td>
+                            <td class="plan-column">1</td>
+                            <td class="plan-column">1</td>
+                            <td class="plan-column">Multiple</td>
+                        </tr>
+                        <tr>
+                            <td>Vehicle profiles</td>
+                            <td class="plan-column">1</td>
+                            <td class="plan-column">Up to 3</td>
+                            <td class="plan-column">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Team member roles & permissions</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column">Basic</td>
+                            <td class="plan-column">Advanced</td>
+                        </tr>
+                        
+                        <tr class="feature-group-header">
+                            <td colspan="4">Setup Tracking</td>
+                        </tr>
+                        <tr>
+                            <td>Basic setup recording</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Custom setup templates</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Setup comparison tools</td>
+                            <td class="plan-column">Basic</td>
+                            <td class="plan-column">Advanced</td>
+                            <td class="plan-column">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>Track-specific setup history</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Setup Comparison Tools</td>
+                            <td class="plan-column">—</td>d
+                            <td class="plan-column">—</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        
+                        <tr class="feature-group-header">
+                            <td colspan="4">Weather Integration</td>
+                        </tr>
+                        <tr>
+                            <td>Weather data recording</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Weather-setup correlation</td>
+                            <td class="plan-column">Basic</td>
+                            <td class="plan-column">Advanced</td>
+                            <td class="plan-column">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>Historical weather matching</td>
+                            <td class="plan-column">Limited</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        
+                        <tr class="feature-group-header">
+                            <td colspan="4">Results & Analytics</td>
+                        </tr>
+                        <tr>
+                            <td>Results storage</td>
+                            <td class="plan-column">Results and lap times</td>
+                            <td class="plan-column">Full</td>
+                            <td class="plan-column">Full</td>
+                        </tr>
+                        <tr>
+                            <td>Lap time analysis</td>
+                            <td class="plan-column">Basic</td>
+                            <td class="plan-column">Advanced</td>
+                            <td class="plan-column">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>Position tracking</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Driver performance comparison</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Custom reporting</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column">Limited</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        
+                        <tr class="feature-group-header">
+                            <td colspan="4">Parts & Maintenance</td>
+                        </tr>
+                        <tr>
+                            <td>Parts lifecycle tracking</td>
+                            <td class="plan-column">Basic</td>
+                            <td class="plan-column">Advanced</td>
+                            <td class="plan-column">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenance scheduling</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Parts inventory management</td>
+                            <td class="plan-column">—</td>
+                            <td class="plan-column">Limited</td>
+                            <td class="plan-column"><span class="check-icon">✓</span></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is the difference between the Pro and Team plans?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The Pro plan is designed for individual competitors who want to get the edge on their competitors, while the Team plan is intended for race teams mnaging multiple drivers and vehicles. The Team plan includes features like team management dashboard and setup sharing across team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I upgrade or downgrade my plan at any time?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can upgrade or downgrade your plan at any time. You can manage your subscription through your account settings.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer a free trial?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We do not offer a free trial. However, you can try our service for 14 days and cancel anytime if you're not satisfied.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Racing Experience?</h2>
+            <p>Sign up today and start using Motorlytics to improve your racing performance.</p>
+            <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Sign Up</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="logo">
+                        <img src="images/Logo.svg" alt="Motorlytics Logo" class="logo-image">
+                        <span class="logo-text">Motorlytics</span>
+                    </div>
+                    <p style="color: var(--color-text-secondary); margin-top: 1rem;">The ultimate race management platform for drivers and teams.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact-us.html">Contact</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Motorlytics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
