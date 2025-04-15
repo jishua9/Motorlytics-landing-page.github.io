@@ -45,6 +45,20 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+select {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: white;
+}
+
+option {
+    background-color: var(--color-darker);
+    color: var(--color-text);
+}
+
 .header-content {
     display: flex;
     justify-content: space-between;

@@ -4,13 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
-            message: document.getElementById('message').value
-        };
+        // Get form data using FormData API
+        const formData = new FormData(contactForm);
+        const formDataObj = {};
+        formData.forEach((value, key) => {
+            formDataObj[key] = value;
+        });
 
         // Show loading state
         const submitButton = contactForm.querySelector('button[type="submit"]');
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formDataObj)
         })
         .then(response => {
             if (!response.ok) {
