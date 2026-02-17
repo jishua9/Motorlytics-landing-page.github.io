@@ -2,6 +2,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { AnimatedGrid } from '@/components/AnimatedGrid'
 import { HeroVisual } from '@/components/HeroVisual'
+import { BarChart3, Car, Gauge } from 'lucide-react'
+import { FeatureCard } from '@/components/FeatureCard'
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -50,6 +52,49 @@ export default function HomePage() {
           {/* Right: Visual (40%) */}
           <div className="flex items-center lg:col-span-2">
             <HeroVisual />
+          </div>
+        </div>
+      </section>
+
+      {/* Core Features Highlight */}
+      <section className="relative py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Section Header */}
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-text-select">
+              Everything you need to race smarter
+            </h2>
+            <p className="text-lg text-text">
+              From telemetry analysis to maintenance tracking, Motorlytics
+              handles it all
+            </p>
+          </div>
+
+          {/* Three-column grid */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <FeatureCard
+              icon={BarChart3}
+              title="Professional Telemetry"
+              description="Import MoTeC data and analyze every corner, brake point, and throttle input with professional-grade visualizations."
+              linkText="Explore Analytics"
+              linkHref="/features#analytics"
+            />
+
+            <FeatureCard
+              icon={Car}
+              title="Complete Car Management"
+              description="Track parts lifecycle, maintenance schedules, and costs. Never miss a service interval or part replacement again."
+              linkText="See Features"
+              linkHref="/features#management"
+            />
+
+            <FeatureCard
+              icon={Gauge}
+              title="Real-Time Pit Wall"
+              description="Live weather radar, session schedules, and setup tracking. Everything your team needs on race day, in one place."
+              linkText="Learn More"
+              linkHref="/features#pitwall"
+            />
           </div>
         </div>
       </section>
