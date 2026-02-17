@@ -98,6 +98,85 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Telemetry Showcase */}
+      <section className="relative py-24 bg-grid-title">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Section Header */}
+          <div className="mb-12 text-center">
+            <Badge variant="outline" className="mb-4 border-primary text-primary">
+              PRO FEATURE
+            </Badge>
+            <h2 className="mb-4 text-4xl font-bold text-text-select">
+              Data that drives performance
+            </h2>
+            <p className="text-lg text-text">
+              Import your MoTeC logs and unlock insights that shave tenths off
+              your lap times
+            </p>
+          </div>
+
+          {/* Large mockup */}
+          <div className="mb-12 flex justify-center">
+            <div className="relative h-[600px] w-full max-w-5xl rounded-xl border-2 border-primary bg-grid p-8 shadow-[0_0_80px_rgba(255,136,0,0.4)] transform perspective-1000 rotate-y-5">
+              <div className="flex h-full items-center justify-center text-text-sub">
+                Analytics Dashboard Mockup
+                <br />
+                (3 animated charts: Speed, Throttle, Brake)
+                <br />
+                (Animated GIF placeholder)
+              </div>
+            </div>
+          </div>
+
+          {/* Quick stats */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mb-2 flex justify-center">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 font-semibold text-text-select">
+                Multi-Channel Analysis
+              </h3>
+              <p className="text-sm text-text">
+                Compare unlimited data channels
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="mb-2 flex justify-center">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 font-semibold text-text-select">
+                Lap-by-Lap Breakdown
+              </h3>
+              <p className="text-sm text-text">
+                Analyze every lap individually
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="mb-2 flex justify-center">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 font-semibold text-text-select">
+                Corner Analysis
+              </h3>
+              <p className="text-sm text-text">
+                Identify where you&apos;re gaining or losing time
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button variant="ghost" asChild>
+              <Link href="/features#analytics">
+                See Analytics in Action →
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
