@@ -4,6 +4,7 @@ import { AnimatedGrid } from '@/components/AnimatedGrid'
 import { HeroVisual } from '@/components/HeroVisual'
 import { BarChart3, Car, Gauge } from 'lucide-react'
 import { FeatureCard } from '@/components/FeatureCard'
+import { PricingCard } from '@/components/PricingCard'
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -174,6 +175,95 @@ export default function HomePage() {
                 See Analytics in Action →
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Teaser */}
+      <section className="relative py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Section Header */}
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-text-select">
+              Start racing smarter today
+            </h2>
+            <p className="text-lg text-text">
+              Choose the plan that fits your racing program
+            </p>
+          </div>
+
+          {/* Three pricing cards */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <PricingCard
+              name="Amateur"
+              price="$0"
+              billing="Forever"
+              description="Perfect for club racers getting started"
+              features={[
+                '2 cars',
+                'Event tracking',
+                'Setup sheets',
+                'Parts management',
+                'Results import',
+                'Basic analytics',
+                'Mobile access',
+              ]}
+              ctaText="Get Started Free →"
+              ctaHref="https://app.motorlytics.com.au/signup?tier=amateur"
+              footerNote="No credit card required"
+            />
+
+            <PricingCard
+              name="Pro"
+              price="$15"
+              billing="per month"
+              description="For serious racers who demand the best"
+              features={[
+                'Everything in Amateur',
+                'Unlimited cars',
+                'MoTeC telemetry import',
+                'Advanced analytics',
+                'Corner analysis',
+                'G-force visualization',
+                'Cost tracking',
+                'Priority support',
+              ]}
+              ctaText="Start Free Trial →"
+              ctaHref="https://app.motorlytics.com.au/signup?tier=pro"
+              badge="MOST POPULAR"
+              featured={true}
+              footerNote="14-day free trial"
+            />
+
+            <PricingCard
+              name="Team"
+              price="TBA"
+              billing="per month"
+              description="Built for racing teams and multi-driver operations"
+              features={[
+                'Everything in Pro',
+                'Multiple drivers',
+                'Shared cars',
+                'Team dashboard',
+                'Collaborative tools',
+                'Advanced permissions',
+                'Dedicated support',
+              ]}
+              ctaText="Join Waitlist →"
+              ctaHref="https://app.motorlytics.com.au/signup?tier=team"
+              badge="COMING SOON"
+              comingSoon={true}
+              footerNote="Be the first to know"
+            />
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/pricing"
+              className="text-primary hover:underline"
+            >
+              Compare all features →
+            </Link>
           </div>
         </div>
       </section>
