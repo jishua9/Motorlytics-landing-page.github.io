@@ -267,6 +267,39 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Final CTA */}
+      <section className="relative bg-gradient-to-b from-transparent via-primary/5 to-transparent py-24">
+        <AnimatedGrid />
+
+        <div className="relative mx-auto max-w-2xl px-6 text-center">
+          <h2 className="mb-6 text-5xl font-bold text-text-select">
+            Ready to race smarter?
+          </h2>
+
+          <p className="mb-8 text-xl text-text">
+            Join racers using Motorlytics to track, analyze, and improve their
+            performance.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href="https://app.motorlytics.com.au/signup?tier=amateur">
+                Get Started Free →
+              </Link>
+            </Button>
+            <Button size="lg" variant="ghost" asChild>
+              <Link href="/features">
+                View Live Demo
+              </Link>
+            </Button>
+          </div>
+
+          <p className="mt-4 text-sm text-text-sub">
+            No credit card required • Free forever for amateur racers
+          </p>
+        </div>
+      </section>
     </main>
   )
 }
