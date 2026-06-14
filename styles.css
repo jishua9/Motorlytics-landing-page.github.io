@@ -260,3 +260,15 @@ img,svg{display:block;max-width:100%}
 .prose p{color:var(--text);margin-bottom:14px}
 .prose ul{color:var(--text);margin:0 0 14px 22px}
 .prose li{margin-bottom:6px}
+
+/* ====================== RESPONSIVE / A11Y POLISH ====================== */
+@media (max-width:860px){
+  .section{padding:56px 0}
+  .section-head h2{font-size:1.7rem}
+  .page-hero h1{font-size:2rem}
+}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.btn:focus-visible{outline-offset:3px}
+a.skip{position:absolute;left:-9999px}
+a.skip:focus{left:16px;top:16px;background:var(--primary);color:var(--on-primary);
+  padding:8px 14px;border-radius:8px;z-index:100}
