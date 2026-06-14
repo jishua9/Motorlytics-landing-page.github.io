@@ -1,282 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motorlytics - Race Management Platform</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+  <!-- ===== CANONICAL <head> — copy into every page; change <title>/<meta description> per page ===== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motorlytics — Your complete motorsport companion</title>
+  <meta name="description" content="Motorlytics brings your telemetry, results, calendar, weather, car services and costs into one platform. Your own pit wall, all season long.">
+  <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <img src="images/Logo.svg" alt="Motorlytics Logo" class="logo-image">
-                <span class="logo-text">Motorlytics</span>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="features.html">Features</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="about.html">About</a>
-                <a href="contact-us.html">Contact</a>
-                <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Sign Up</a>
-            </nav>
-        </div>
-    </header>
-    
+  <!-- ===== CANONICAL NAV ===== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo.svg" alt="Motorlytics logo">
+        <span><span class="wm">Motorlytics</span><br><span class="sl">Race Analytics</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <nav class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="https://app.motorlytics.com.au/login">Login</a>
+        <a class="btn btn-primary btn-sm" href="https://app.motorlytics.com.au/register">Start free trial</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
     <section class="hero">
-        <div class="container">
-            <h1>Race Management <span>Simplified</span></h1>
-            <p>The all-in-one platform for race teams to track performance, manage maintenance, and optimize race day operations. Take control of your motorsport success.</p>
-            <div class="hero-buttons">
-                <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Sign Up</a>
-                <a href="features.html" class="secondary-button">Learn More</a>
-            </div>
-            <div class="hero-image">
-                <img src="images/hero-image.jpg" alt="Motorlytics Dashboard" style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
+      <div class="container hero-inner">
+        <div class="reveal">
+          <span class="eyebrow">// Telemetry · Pit wall · Maintenance · Results</span>
+          <h1>Your complete<br><span class="accent">motorsport companion.</span></h1>
+          <p class="hero-sub">Motorlytics pulls your telemetry, results, calendar, weather, car services and costs into a single platform — your own pit wall, all season long.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
+            <a class="btn btn-outline" href="#features">See a sample session</a>
+          </div>
+          <p class="hero-micro">14 days free · Cancel anytime</p>
+          <div class="hero-readout">
+            <div><div class="v" style="color:var(--primary)" data-countup="31.204" data-prefix="1:" data-decimals="3">1:31.204</div><div class="l">Best lap</div></div>
+            <div><div class="v mono" data-countup="212">212<span style="font-size:.8rem">km/h</span></div><div class="l">Top speed</div></div>
+            <div><div class="v" style="color:var(--fastest)">−0.38</div><div class="l">Delta · T4</div></div>
+          </div>
         </div>
+        <div class="reveal">
+          <div class="panel">
+            <div class="panel-strip"><span>PHILLIP ISLAND · RACE 2</span><span>NEXT 14:30 · ☀ 22°C · <span class="live">LAP 14</span></span></div>
+            <div class="panel-body">
+              <figure class="shot shot--empty" data-shot="HERO SCREENSHOT&#10;Telemetry track map&#10;images/hero-telemetry.png&#10;~1600×1000">
+                <img src="images/hero-telemetry.png" alt="Motorlytics telemetry track map with speed-coloured GPS trace" loading="eager"
+                     onerror="this.remove();this.parentNode.classList.add('shot--empty')">
+              </figure>
+              <div class="modrow"><span>DASH</span><span>RESULTS</span><span>CALENDAR</span><span>WEATHER</span><span>SERVICES</span><span>COSTS</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-    
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Setup Knowledge Is Track Advantage</h2>
-                <p>Motorlytics provides a comprehensive set of tools to maximize your race performance.</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Track + Weather + Setup Correlation</h3>
-                    <p>Connect your exact car setup with specific weather conditions at each track. Find the winning formula by analyzing successful setups in similar conditions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Parts Lifecycle Tracking</h3>
-                    <p>Monitor the wear and maintenance needs of every component in your racing vehicle to prevent failures.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M16 18v-2h1v-1h-5v1h1v2H7v-9h2V7H5v2h2v9H3v2h18v-2h-5zm-7-7v2h2v-2H9zm4 0v2h2v-2h-2z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Results Analysis</h3>
-                    <p>Link your race results directly to setups and conditions. Learn what truly works by seeing the connection between your setup choices and race outcomes.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Service Management</h3>
-                    <p>Schedule and track maintenance tasks to keep your vehicle in peak racing condition.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Performance Metrics</h3>
-                    <p>Comprehensive statistics to visualize your racing progress and identify trends.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="#FF8800"/>
-                        </svg>
-                    </div>
-                    <h3>Event-Centered Organization</h3>
-                    <p>All your track information in one place - setup data, weather conditions, results, and maintenance records are connected to each event for easy reference.</p>
-                </div>
-            </div>
+
+    <section class="strip">
+      <div class="container strip-inner reveal">
+        <p>Brings your whole season together — works with</p>
+        <div class="strip-sources">
+          <span>MoTeC</span><span>AiM</span><span>Natsoft</span><span>Motorsport Australia</span><span>Live weather</span>
         </div>
+      </div>
     </section>
-    
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Trusted by Racing Teams</h2>
-                <p>Hear what our customers have to say about how Motorlytics has transformed their race management.</p>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"Motorlytics has completely changed how we prepare for race weekends. The parts tracking alone has saved us from at least two potential DNFs this season."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="/api/placeholder/50/50" alt="James Wilson" />
-                        <div class="author-info">
-                            <h4>James Wilson</h4>
-                            <p>Formula Vee Team Manager</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"The weather forecasting and historical data has given us a competitive edge. We can now make setup decisions with confidence, no matter the conditions."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="/api/placeholder/50/50" alt="Sarah Johnson" />
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>GT4 Race Engineer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>"As an amateur racer, Motorlytics has been invaluable. I can track my performance improvements and maintain my car like a professional team would."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="/api/placeholder/50/50" alt="Michael Chen" />
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Club Racer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Everything in one platform</h2>
+          <p>Stop juggling logger software, spreadsheets and paper. Motorlytics keeps your whole racing season in one place.</p>
         </div>
+        <div class="bento">
+          <div class="tile tile--feature reveal">
+            <div class="ico">📈</div>
+            <h3>Dash data &amp; telemetry</h3>
+            <p>Import MoTeC &amp; AiM data for lap charts, GPS track maps, corner-by-corner analysis, G-force and engine session-health gauges.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="ico">🏁</div>
+            <h3>Results &amp; timing</h3>
+            <p>Import from Natsoft or CSV — lap times, position charts, best-lap highlighting and career stats.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="ico">📅</div>
+            <h3>Race calendar</h3>
+            <p>Browse and join events, or sync the Motorsport Australia calendar. Set your number and category.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="ico">🌦️</div>
+            <h3>Pit wall &amp; weather</h3>
+            <p>Countdown, live weather, rain radar and the full session schedule for every event.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="ico">🔧</div>
+            <h3>Car &amp; services</h3>
+            <p>Parts lifecycle, service records, tyre sets and odometer tracking — never miss a replacement.</p>
+          </div>
+          <div class="tile reveal">
+            <div class="ico">💲</div>
+            <h3>Racing costs</h3>
+            <p>Track parts and service spend across the whole season.</p>
+          </div>
+        </div>
+      </div>
     </section>
-    
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-title">
-                <h2>Simple, Transparent Pricing</h2>
-                <p>Choose the plan that fits your racing needs.</p>
+
+    <section class="section" style="border-top:1px solid var(--border)">
+      <div class="container">
+        <div class="rows">
+
+          <div class="row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Telemetry</span>
+              <h3>See exactly where the time goes</h3>
+              <p>Upload a MoTeC or AiM session and Motorlytics maps every lap to the track — speed-coloured GPS lines, corner-by-corner entry/apex/exit analysis, and a lap-delta chart that shows where you're gaining and losing.</p>
+              <ul><li>GPS track map with speed colouring</li><li>Corner entry / apex / exit comparison</li><li>Lap-delta &amp; multi-channel charts</li><li>G-force and engine session-health gauges</li></ul>
             </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Amateur</h3>
-                        <p>Perfect for club racers</p>
-                    </div>
-                    <div class="price">
-                        FREE<span>/month</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Single driver account</li>
-                        <li>One vehicle profile</li>
-                        <li>Basic maintenance tracking</li>
-                        <li>Event calendar</li>
-                        <li>Basic weather forecasts</li>
-                    </ul>
-                    <div class="center-btn">
-                        <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Get Started</a>
-                    </div>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="pricing-header">
-                        <h3>Pro</h3>
-                        <p>For serious competitors</p>
-                    </div>
-                    <div class="price">
-                        $15<span>/month</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Single driver accounts</li>
-                        <li>Multiple vehicle profiles</li>
-                        <li>Advanced part tracking</li>
-                        <li>Full service history</li>
-                        <li>Detailed lap analytics</li>
-                        <li>Customizable setup templates</li>
-                        <li>Setup comparison tools</li>
-                    </ul>
-                    <div class="center-btn">
-                        <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Get Started</a>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Team</h3>
-                        <p>For professional race teams</p>
-                    </div>
-                    <div class="price">
-                        $30<span>/month</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>Multiple driver accounts</li>
-                        <li>Unlimited vehicle profiles</li>
-                        <li>Team management dashboard</li>
-                        <li>Advanced part tracking</li>
-                        <li>Full service history</li>
-                        <li>Detailed lap analytics</li>
-                        <li>Customizable setup templates</li>
-                        <li>Custom Driver reports</li>
-                    </ul>
-                    <div class="center-btn">
-                        <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Get Started</a>
-                    </div>
-                </div>
+            <div class="row-media">
+              <div class="panel"><figure class="shot shot--empty" data-shot="DEEP-DIVE 1&#10;Telemetry charts / corner analysis&#10;images/feature-telemetry.png&#10;~1400×900">
+                <img src="images/feature-telemetry.png" alt="Telemetry charts and corner analysis" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
             </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Pit wall</span>
+              <h3>Your own pit wall, every event</h3>
+              <p>Walk into the weekend prepared. A live countdown to your next session, current track conditions, rain radar and the full schedule — all in one dashboard.</p>
+              <ul><li>Countdown to your next session</li><li>Live weather &amp; hourly forecast</li><li>Rain radar on the map</li><li>Full session schedule with live status</li></ul>
+            </div>
+            <div class="row-media">
+              <div class="panel"><figure class="shot shot--empty" data-shot="DEEP-DIVE 2&#10;Pit Wall dashboard&#10;images/feature-pitwall.png&#10;~1400×900">
+                <img src="images/feature-pitwall.png" alt="Pit Wall dashboard with weather and schedule" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
+            </div>
+          </div>
+
+          <div class="row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Car &amp; costs</span>
+              <h3>Run your car like a pro team</h3>
+              <p>Track every part's lifecycle, log services, manage tyre sets, and keep a running tally of what your season is costing — so nothing fails unexpectedly and nothing's a surprise on the budget.</p>
+              <ul><li>Parts lifecycle &amp; replacement alerts</li><li>Service records and tyre sets</li><li>Odometer / racing-KM tracking</li><li>Parts &amp; service cost tracking</li></ul>
+            </div>
+            <div class="row-media">
+              <div class="panel"><figure class="shot shot--empty" data-shot="DEEP-DIVE 3&#10;Car profile / costs&#10;images/feature-car-costs.png&#10;~1400×900">
+                <img src="images/feature-car-costs.png" alt="Car profile with parts lifecycle and cost tracking" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
-    
-    <section class="cta" id="contact">
-        <div class="container">
-            <h2>Ready to Elevate Your Racing?</h2>
-            <p>Join thousands of racers who have transformed their track performance with Motorlytics.</p>
-            <div class="cta-buttons">
-                <a href="https://motorlytics-wa.azurewebsites.net/register" class="cta-button">Sign Up</a>
-                <a href="contact-us.html" class="secondary-button">Contact Us</a>
-            </div>
+
+    <section class="section" style="background:#0a0d12;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="container">
+        <div class="section-head reveal"><h2>From file to insight in three steps</h2></div>
+        <div class="steps">
+          <div class="step reveal"><div class="num">1</div><h3>Upload your session</h3><p>Drop in a MoTeC or AiM file — channels are normalised automatically.</p></div>
+          <div class="step reveal"><div class="num">2</div><h3>See everything</h3><p>Lap times, track map, corner analysis and session health, instantly.</p></div>
+          <div class="step reveal"><div class="num">3</div><h3>Manage your season</h3><p>Track your car, costs, calendar and results — all in one place.</p></div>
         </div>
+      </div>
     </section>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <div class="logo">
-                        <img src="images/Logo.svg" alt="Motorlytics Logo" class="logo-image">
-                        <span class="logo-text">Motorlytics</span>
-                    </div>
-                    <p style="color: var(--color-text-secondary); margin-top: 1rem;">The ultimate race management platform for drivers and teams.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Product</h4>
-                    <ul class="footer-links">
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Tutorials</a></li>
-                        <li><a href="#">Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact-us.html">Contact</a></li>
-                        <li><a href="legal.html">Legal</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Motorlytics. All rights reserved.</p>
-            </div>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head reveal"><h2>One plan. Everything included.</h2><p>No tiers to decode. Start with a 14-day free trial.</p></div>
+        <div class="price-wrap reveal">
+          <div class="price-card">
+            <div class="tier">Racer</div>
+            <div class="amount">$15<span>/month AUD</span></div>
+            <div class="trial">14-day free trial · Cancel anytime</div>
+            <ul class="price-feats">
+              <li>Telemetry import &amp; analysis (MoTeC + AiM)</li>
+              <li>Results, lap times &amp; career stats</li>
+              <li>Race calendar &amp; Motorsport Australia sync</li>
+              <li>Pit wall — weather, radar &amp; schedule</li>
+              <li>Car, parts, service &amp; cost tracking</li>
+              <li>Unlimited cars &amp; setup sheets</li>
+            </ul>
+            <a class="btn btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
+            <p class="price-note">Team version coming soon. <a href="pricing.html" style="color:var(--primary)">Full details →</a></p>
+          </div>
         </div>
-    </footer>
-    
-    <script src="scripts.js"></script>
+      </div>
+    </section>
+
+    <section class="section" style="background:#0a0d12;border-top:1px solid var(--border)">
+      <div class="container">
+        <div class="section-head reveal"><h2>Frequently asked questions</h2></div>
+        <div class="faq reveal">
+          <div class="faq-item"><button class="faq-q">Which data loggers and formats work?</button><div class="faq-a"><p>MoTeC (.ld and CSV) and AiM CSV for telemetry; Natsoft and CSV for results.</p></div></div>
+          <div class="faq-item"><button class="faq-q">Do I need a data logger?</button><div class="faq-a"><p>No. Results, calendar, pit wall and maintenance all work without telemetry — the dash-data analysis is there when you have it.</p></div></div>
+          <div class="faq-item"><button class="faq-q">Who owns my data?</button><div class="faq-a"><p>You do. Your telemetry, setups and results stay yours.</p></div></div>
+          <div class="faq-item"><button class="faq-q">How does the free trial work?</button><div class="faq-a"><p>14 days free, then $15/month. Cancel anytime.</p></div></div>
+          <div class="faq-item"><button class="faq-q">What categories is it for?</button><div class="faq-a"><p>Built for grassroots Australian motorsport — any car, any category. Australian circuits are seeded out of the box.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container reveal">
+        <h2>Bring your whole season into one place.</h2>
+        <p>Telemetry, results, calendar, weather, car &amp; costs — your complete motorsport companion.</p>
+        <a class="btn btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
+        <p class="hero-micro">14 days free · Cancel anytime</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== CANONICAL FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="brand" href="index.html">
+            <img src="images/logo.svg" alt="Motorlytics logo">
+            <span><span class="wm">Motorlytics</span><br><span class="sl">Race Analytics</span></span>
+          </a>
+          <p class="footer-tag">Your complete motorsport companion — every lap, part and dollar in one place.</p>
+        </div>
+        <div class="footer-col"><h4>Product</h4>
+          <a href="index.html#features">Features</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+        <div class="footer-col"><h4>Company</h4>
+          <a href="about.html">About</a>
+        </div>
+        <div class="footer-col"><h4>Legal</h4>
+          <a href="legal.html#privacy">Privacy</a>
+          <a href="legal.html#terms">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Motorlytics. All rights reserved.</div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
 </body>
 </html>

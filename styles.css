@@ -110,3 +110,133 @@ img,svg{display:block;max-width:100%}
 .footer-bottom{border-top:1px solid var(--border);margin-top:40px;padding-top:20px;
   color:var(--text-muted);font-size:.82rem}
 @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+
+/* ====================== HERO ====================== */
+.hero{position:relative;overflow:hidden;background:var(--hero-bloom),var(--bg);
+  border-bottom:1px solid var(--border)}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:24px 24px;
+  -webkit-mask-image:radial-gradient(circle at 70% 28%,#000,transparent 70%);
+  mask-image:radial-gradient(circle at 70% 28%,#000,transparent 70%)}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:44px;
+  align-items:center;padding:72px 0 80px}
+.hero h1{font-size:3rem;font-weight:800;letter-spacing:-1px;margin-top:14px}
+.hero h1 .accent{color:var(--primary)}
+.hero-sub{color:var(--text);font-size:1.15rem;max-width:460px;margin-top:18px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-micro{margin-top:14px;color:var(--text-muted);font-family:var(--font-mono);font-size:.78rem}
+.hero-readout{display:flex;gap:30px;margin-top:30px}
+.hero-readout .v{font-family:var(--font-mono);font-size:1.5rem;font-weight:700}
+.hero-readout .l{color:var(--text-muted);font-size:.62rem;text-transform:uppercase;
+  letter-spacing:.5px;margin-top:3px}
+/* app panel framing the hero screenshot */
+.panel{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;box-shadow:0 0 55px rgba(255,136,0,.12)}
+.panel-strip{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+  background:var(--card-header);border-bottom:1px solid var(--border);
+  font-family:var(--font-head);font-weight:600;font-size:.72rem;color:var(--text)}
+.panel-strip .live{color:var(--improved)}
+.panel-body{padding:12px}
+.modrow{display:flex;gap:6px;margin-top:10px}
+.modrow span{flex:1;text-align:center;font-family:var(--font-head);font-weight:600;
+  font-size:.6rem;color:var(--primary);background:var(--surface);
+  border:1px solid rgba(255,136,0,.35);border-radius:var(--radius-sm);padding:6px 0}
+/* screenshot slot (shared by all pages) */
+.shot{position:relative;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface)}
+.shot img{width:100%;height:auto;display:block}
+.shot--empty{min-height:200px;border:1px dashed var(--border-strong);
+  display:flex;align-items:center;justify-content:center}
+.shot--empty::before{content:attr(data-shot);color:var(--text-muted);
+  font-family:var(--font-mono);font-size:.72rem;text-align:center;padding:16px;white-space:pre-line}
+@media (max-width:860px){
+  .hero-inner{grid-template-columns:1fr;gap:32px;padding:48px 0 56px}
+  .hero h1{font-size:2.2rem}
+}
+
+/* ====================== SOURCE STRIP ====================== */
+.strip{border-bottom:1px solid var(--border);background:#0a0d12}
+.strip-inner{padding:26px 0;text-align:center}
+.strip-inner p{color:var(--text-muted);font-size:.92rem}
+.strip-sources{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px;margin-top:14px}
+.strip-sources span{font-family:var(--font-head);font-weight:700;color:var(--text-strong);
+  font-size:1.05rem;letter-spacing:.3px}
+.strip-sources span::after{content:"";display:inline-block;width:5px;height:5px;
+  background:var(--primary);border-radius:50%;margin-left:18px;vertical-align:middle}
+.strip-sources span:last-child::after{display:none}
+
+/* ====================== BENTO ====================== */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.tile:hover{border-color:rgba(255,136,0,.45);box-shadow:var(--glow);transform:translateY(-3px)}
+.tile .ico{width:42px;height:42px;border-radius:var(--radius-sm);
+  background:rgba(255,136,0,.12);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:14px}
+.tile h3{font-size:1.15rem;font-weight:700}
+.tile p{color:var(--text);font-size:.92rem;margin-top:8px}
+.tile--feature{grid-column:span 2;border-color:rgba(255,136,0,.35)}
+.tile--feature h3{color:var(--primary)}
+@media (max-width:860px){.bento{grid-template-columns:1fr}.tile--feature{grid-column:span 1}}
+
+/* ====================== DEEP-DIVE ROWS ====================== */
+.rows{display:flex;flex-direction:column;gap:72px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.row:nth-child(even) .row-media{order:-1}
+.row-text .eyebrow{display:block;margin-bottom:10px}
+.row-text h3{font-size:1.7rem;font-weight:800;letter-spacing:-.4px}
+.row-text p{color:var(--text);margin-top:12px;font-size:1.02rem}
+.row-text ul{list-style:none;margin-top:16px}
+.row-text li{padding:6px 0 6px 26px;position:relative;color:var(--text)}
+.row-text li::before{content:"›";position:absolute;left:0;color:var(--primary);font-weight:700}
+.row-media .panel{box-shadow:0 0 40px rgba(255,136,0,.10)}
+@media (max-width:860px){
+  .row{grid-template-columns:1fr;gap:24px}
+  .row:nth-child(even) .row-media{order:0}
+}
+
+/* ====================== HOW IT WORKS ====================== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;position:relative}
+.step .num{font-family:var(--font-mono);font-weight:700;color:var(--on-primary);
+  background:var(--primary);width:30px;height:30px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.step h3{font-size:1.15rem;margin-top:16px}
+.step p{color:var(--text);font-size:.92rem;margin-top:8px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* ====================== PRICING CARD ====================== */
+.price-wrap{display:flex;justify-content:center}
+.price-card{background:var(--surface);border:1px solid rgba(255,136,0,.4);
+  border-radius:var(--radius);padding:34px;max-width:420px;width:100%;
+  box-shadow:0 0 50px rgba(255,136,0,.10);text-align:center}
+.price-card .tier{font-family:var(--font-head);font-weight:700;color:var(--primary);
+  text-transform:uppercase;letter-spacing:1px;font-size:.85rem}
+.price-card .amount{font-family:var(--font-mono);font-size:3rem;font-weight:700;
+  color:var(--text-strong);margin:10px 0 2px}
+.price-card .amount span{font-size:1rem;color:var(--text-muted)}
+.price-card .trial{color:var(--text);font-size:.95rem}
+.price-feats{list-style:none;text-align:left;margin:22px 0 26px}
+.price-feats li{padding:7px 0 7px 26px;position:relative;color:var(--text);font-size:.95rem}
+.price-feats li::before{content:"✓";position:absolute;left:0;color:var(--primary);font-weight:700}
+.price-card .btn{width:100%}
+.price-note{color:var(--text-muted);font-size:.82rem;margin-top:14px}
+
+/* ====================== FAQ ====================== */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  padding:18px 20px;color:var(--text-strong);font-family:var(--font-head);font-weight:600;
+  font-size:1rem;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q::after{content:"+";color:var(--primary);font-size:1.3rem;flex-shrink:0}
+.faq-item.open .faq-q::after{content:"−"}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 20px 18px;color:var(--text);font-size:.95rem}
+.faq-item.open .faq-a{max-height:240px}
+
+/* ====================== FINAL CTA ====================== */
+.cta-band{position:relative;overflow:hidden;text-align:center;padding:80px 0;
+  background:var(--hero-bloom),#0a0d12;border-top:1px solid var(--border)}
+.cta-band h2{font-size:2.4rem;font-weight:800;letter-spacing:-.5px}
+.cta-band p{color:var(--text);margin:14px 0 26px}
+.cta-band .hero-micro{margin-top:16px}
