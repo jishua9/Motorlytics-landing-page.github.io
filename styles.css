@@ -909,12 +909,12 @@ a.skip:focus{left:16px;top:16px;background:var(--primary);color:var(--on-primary
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 2.6rem;
-  color: #FF5F00;
+  color: #ff8800;
   text-shadow: 0 0 20px rgba(255,95,0,.5), 0 0 40px rgba(255,95,0,.2);
   line-height: 1;
 }
 .stat-inf {
-  color: #FF5F00;
+  color: #ff8800;
   text-shadow: 0 0 20px rgba(255,95,0,.5), 0 0 40px rgba(255,95,0,.2);
 }
 .stat-label {
