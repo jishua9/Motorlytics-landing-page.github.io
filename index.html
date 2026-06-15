@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -34,35 +34,136 @@
 
   <main>
     <section class="hero">
-      <div class="container hero-inner">
-        <div class="reveal">
-          <span class="eyebrow">// Telemetry · Pit wall · Maintenance · Results</span>
-          <h1>Your complete<br><span class="accent">motorsport companion.</span></h1>
-          <p class="hero-sub">Motorlytics pulls your telemetry, results, calendar, weather, car services and costs into a single platform — your own pit wall, all season long.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
-            <a class="btn btn-outline" href="#telemetry">See a sample session</a>
-          </div>
-          <p class="hero-micro">14 days free · Cancel anytime</p>
-          <div class="hero-readout">
-            <div><div class="v" style="color:var(--primary)" data-countup="31.204" data-prefix="1:" data-decimals="3">1:31.204</div><div class="l">Best lap</div></div>
-            <div><div class="v mono" data-countup="212">212<span style="font-size:.8rem">km/h</span></div><div class="l">Top speed</div></div>
-            <div><div class="v" style="color:var(--fastest)">−0.38</div><div class="l">Delta · T4</div></div>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="panel">
-            <div class="panel-strip"><span>PHILLIP ISLAND · RACE 2</span><span>NEXT 14:30 · ☀ 22°C · <span class="live">LAP 14</span></span></div>
-            <div class="panel-body">
-              <figure class="shot" data-shot="Telemetry · live track map">
-                <img src="images/hero-telemetry.png" alt="Motorlytics telemetry track map with speed-coloured GPS trace" loading="eager"
-                     onerror="this.remove();this.parentNode.classList.add('shot--empty')">
-              </figure>
-              <div class="modrow"><span>DASH</span><span>RESULTS</span><span>CALENDAR</span><span>WEATHER</span><span>SERVICES</span><span>COSTS</span></div>
-            </div>
-          </div>
+      <!-- hero copy -->
+      <div class="hero-copy">
+        <p class="eyebrow">// Your complete motorsport companion</p>
+        <h1 class="hero-h1">Every lap. Every corner. <span class="accent">Visualised.</span></h1>
+        <p class="hero-sub">Real-time telemetry overlays, lap analytics, and setup sheets — all in one place for club racers and teams.</p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
+          <a class="btn-ghost" href="#features">See a sample session →</a>
         </div>
       </div>
+
+      <!-- telemetry panel -->
+      <div class="telem-panel" id="telemPanel">
+
+        <!-- ── MAP AREA (dominant, 16:9, ~72% panel height) ──────── -->
+        <div class="map-area">
+
+          <!-- satellite image + canvas overlay fills the area -->
+          <div class="map-wrapper" id="mapWrapper">
+            <img id="trackImg" src="assets/track-satellite.png" alt="Calder Park satellite view" />
+            <canvas id="mapCanvas"></canvas>
+          </div>
+
+          <!-- FLOAT top-left: info + live readouts -->
+          <div class="float-card float-info">
+            <div class="float-header">
+              <span class="float-track-name">CALDER PARK · QUALIFYING</span>
+              <div class="float-laptime-row">
+                <span class="live-dot"></span>
+                <span class="float-lap-mono">LAP 9 · 1:07.783</span>
+              </div>
+            </div>
+            <div class="float-speed-block">
+              <span class="speed-value" id="speedVal">000</span>
+              <span class="speed-unit">km/h</span>
+            </div>
+            <div class="float-channels">
+              <div class="channel-row">
+                <span class="channel-label">THROTTLE</span>
+                <div class="bar-track">
+                  <div class="bar-fill throttle" id="throttleBar" style="width:0%"></div>
+                </div>
+                <span class="channel-val green" id="throttleVal">0%</span>
+              </div>
+              <div class="channel-row">
+                <span class="channel-label">BRAKE</span>
+                <div class="bar-track">
+                  <div class="bar-fill brake" id="brakeBar" style="width:0%"></div>
+                </div>
+                <span class="channel-val red" id="brakeVal">0%</span>
+              </div>
+              <div class="channel-row">
+                <span class="channel-label">RPM</span>
+                <span class="channel-val mono" id="rpmVal">0000</span>
+              </div>
+              <div class="channel-row">
+                <span class="channel-label">gLat</span>
+                <span class="channel-val mono" id="glatVal">0.00</span>
+                <span class="channel-label channel-label-mid">gLon</span>
+                <span class="channel-val mono" id="glonVal">0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLOAT top-right: decorative control pills -->
+          <div class="float-card float-controls">
+            <div class="pill-row">
+              <span class="pill">Map</span>
+              <span class="pill">Dark</span>
+              <span class="pill pill-active">Satellite</span>
+            </div>
+            <div class="pill-row pill-row-mt">
+              <span class="pill">Chart</span>
+              <span class="pill">G-Force</span>
+              <span class="pill pill-active">Speed</span>
+            </div>
+          </div>
+
+          <!-- FLOAT bottom-left: G-G diagram -->
+          <div class="float-card float-gg" id="ggInset">
+            <span class="gg-label">G-FORCE</span>
+            <canvas id="ggCanvas"></canvas>
+          </div>
+
+          <!-- FLOAT bottom-right: speed legend -->
+          <div class="float-card float-legend">
+            <span class="legend-title">Speed (kph)</span>
+            <div class="legend-gradient-bar"></div>
+            <div class="legend-range">
+              <span>67</span>
+              <span>183</span>
+            </div>
+            <span class="legend-attribution">Imagery © Esri</span>
+          </div>
+
+        </div><!-- /map-area -->
+
+        <!-- ── CHANNEL GRAPH PANEL (~28% height, below map) ─────── -->
+        <div class="graph-panel">
+
+          <!-- tab row -->
+          <div class="graph-tabs">
+            <span class="tab tab-active">Speed</span>
+            <span class="tab">Throttle</span>
+            <span class="tab">Brake</span>
+            <span class="tab">Steering</span>
+            <span class="tab">RPM</span>
+            <span class="tab">G-Force</span>
+            <span class="tab">Corners</span>
+          </div>
+
+          <!-- graph canvas -->
+          <div class="graph-canvas-wrap" id="graphWrap">
+            <canvas id="graphCanvas"></canvas>
+          </div>
+
+          <!-- playback bar -->
+          <div class="playback-bar">
+            <span class="playback-play">&#9654;</span>
+            <span class="playback-speed">1x</span>
+            <div class="scrubber-track" id="scrubberTrack">
+              <div class="scrubber-fill" id="scrubberFill"></div>
+              <div class="scrubber-dot" id="scrubberDot"></div>
+            </div>
+            <span class="playback-pct" id="playbackPct">0%</span>
+          </div>
+
+        </div><!-- /graph-panel -->
+
+      </div><!-- /telem-panel -->
     </section>
 
     <section class="strip">
@@ -246,5 +347,6 @@
     </div>
   </footer>
   <script src="main.js"></script>
+  <script src="telemetry-hero.js"></script>
 </body>
 </html>
