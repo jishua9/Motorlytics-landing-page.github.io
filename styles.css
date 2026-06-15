@@ -89,6 +89,8 @@ img,svg{display:block;max-width:100%}
 .nav-links{display:flex;align-items:center;gap:22px}
 .nav-links a{color:var(--text);font-size:.9rem}
 .nav-links a:hover{color:var(--text-strong)}
+/* primary CTA in the nav must keep near-black text (outranks .nav-links a) */
+.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:var(--on-primary)}
 .nav-toggle{display:none;background:none;border:0;color:var(--text-strong);
   font-size:1.5rem;cursor:pointer}
 @media (max-width:760px){
