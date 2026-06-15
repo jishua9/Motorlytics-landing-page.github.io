@@ -145,10 +145,15 @@ img,svg{display:block;max-width:100%}
 /* screenshot slot (shared by all pages) */
 .shot{position:relative;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface)}
 .shot img{width:100%;height:auto;display:block}
-.shot--empty{min-height:200px;border:1px dashed var(--border-strong);
-  display:flex;align-items:center;justify-content:center}
-.shot--empty::before{content:attr(data-shot);color:var(--text-muted);
-  font-family:var(--font-mono);font-size:.72rem;text-align:center;padding:16px;white-space:pre-line}
+.shot--empty{min-height:220px;border:1px solid var(--border);
+  background:radial-gradient(circle at 50% 38%,rgba(255,136,0,.08),transparent 62%),var(--surface);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  text-align:center;padding:28px}
+.shot--empty::before{content:"";width:36px;height:36px;
+  background:url('images/logo.svg') center/contain no-repeat;opacity:.9}
+.shot--empty::after{content:attr(data-shot);color:var(--text);
+  font-family:var(--font-head);font-weight:600;font-size:.95rem;white-space:pre-line;
+  letter-spacing:.2px}
 @media (max-width:860px){
   .hero-inner{grid-template-columns:1fr;gap:32px;padding:48px 0 56px}
   .hero h1{font-size:2.2rem}
