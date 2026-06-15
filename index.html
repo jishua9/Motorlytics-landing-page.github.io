@@ -166,7 +166,10 @@
       </div><!-- /telem-panel -->
     </section>
 
+    <div class="page-body">
+    <div class="rail"></div>
     <section class="strip">
+      <span class="node"></span>
       <div class="container strip-inner reveal">
         <p>Brings your whole season together — works with</p>
         <div class="strip-sources">
@@ -175,7 +178,32 @@
       </div>
     </section>
 
+    <section class="stat-band reveal">
+      <span class="node stat-node"></span>
+      <div class="container">
+        <div class="stat-band-grid">
+          <div class="stat-item">
+            <div class="stat-val mono" data-stat="16">16</div>
+            <div class="stat-label">data channels analysed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val mono" data-stat="18">18</div>
+            <div class="stat-label">AU circuits, ~30 layouts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val mono stat-inf">∞</div>
+            <div class="stat-label">laps, parts &amp; setups</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val mono" data-stat="1">1</div>
+            <div class="stat-label">platform for all of it</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="features">
+      <span class="node"></span>
       <div class="container">
         <div class="section-head reveal">
           <h2>Everything in one platform</h2>
@@ -186,6 +214,9 @@
             <div class="ico">📈</div>
             <h3>Dash data &amp; telemetry</h3>
             <p>Import MoTeC &amp; AiM data for lap charts, GPS track maps, corner-by-corner analysis, G-force and engine session-health gauges.</p>
+            <svg class="tile-chart" viewBox="0 0 300 48" preserveAspectRatio="none">
+              <polyline class="tile-chart-line" points="0,44 35,30 70,36 105,14 145,24 185,8 225,26 265,12 300,18"/>
+            </svg>
           </div>
           <div class="tile reveal">
             <div class="ico">🏁</div>
@@ -217,6 +248,7 @@
     </section>
 
     <section class="section" id="telemetry" style="border-top:1px solid var(--border)">
+      <span class="node"></span>
       <div class="container">
         <div class="rows">
 
@@ -228,8 +260,15 @@
               <ul><li>GPS track map with speed colouring</li><li>Corner entry / apex / exit comparison</li><li>Lap-delta &amp; multi-channel charts</li><li>G-force and engine session-health gauges</li></ul>
             </div>
             <div class="row-media">
-              <div class="panel"><figure class="shot" data-shot="Telemetry · charts &amp; corner analysis">
-                <img src="images/feature-telemetry.png" alt="Telemetry charts and corner analysis" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
+              <div class="telem-screen">
+                <div class="telem-screen-bar">
+                  <span class="telem-screen-title">TELEMETRY</span>
+                  <span class="telem-screen-live">● LIVE</span>
+                </div>
+                <figure class="shot" data-shot="Telemetry · charts &amp; corner analysis">
+                  <img src="images/feature-telemetry.png" alt="Telemetry charts and corner analysis" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
+                </figure>
+              </div>
             </div>
           </div>
 
@@ -241,8 +280,15 @@
               <ul><li>Countdown to your next session</li><li>Live weather &amp; hourly forecast</li><li>Rain radar on the map</li><li>Full session schedule with live status</li></ul>
             </div>
             <div class="row-media">
-              <div class="panel"><figure class="shot" data-shot="Pit wall · weather &amp; schedule">
-                <img src="images/feature-pitwall.png" alt="Pit Wall dashboard with weather and schedule" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
+              <div class="telem-screen">
+                <div class="telem-screen-bar">
+                  <span class="telem-screen-title">PIT WALL</span>
+                  <span class="telem-screen-live">● LIVE</span>
+                </div>
+                <figure class="shot" data-shot="Pit wall · weather &amp; schedule">
+                  <img src="images/feature-pitwall.png" alt="Pit Wall dashboard with weather and schedule" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
+                </figure>
+              </div>
             </div>
           </div>
 
@@ -254,8 +300,15 @@
               <ul><li>Parts lifecycle &amp; replacement alerts</li><li>Service records and tyre sets</li><li>Odometer / racing-KM tracking</li><li>Parts &amp; service cost tracking</li></ul>
             </div>
             <div class="row-media">
-              <div class="panel"><figure class="shot" data-shot="Car · parts, services &amp; costs">
-                <img src="images/feature-car-costs.png" alt="Car profile with parts lifecycle and cost tracking" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')"></figure></div>
+              <div class="telem-screen">
+                <div class="telem-screen-bar">
+                  <span class="telem-screen-title">CAR &amp; COSTS</span>
+                  <span class="telem-screen-live">● READY</span>
+                </div>
+                <figure class="shot" data-shot="Car · parts, services &amp; costs">
+                  <img src="images/feature-car-costs.png" alt="Car profile with parts lifecycle and cost tracking" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
+                </figure>
+              </div>
             </div>
           </div>
 
@@ -264,6 +317,7 @@
     </section>
 
     <section class="section" style="background:#0a0d12;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <span class="node"></span>
       <div class="container">
         <div class="section-head reveal"><h2>From file to insight in three steps</h2></div>
         <div class="steps">
@@ -275,6 +329,7 @@
     </section>
 
     <section class="section" id="pricing">
+      <span class="node"></span>
       <div class="container">
         <div class="section-head reveal"><h2>One plan. Everything included.</h2><p>No tiers to decode. Start with a 14-day free trial.</p></div>
         <div class="price-wrap reveal">
@@ -298,6 +353,7 @@
     </section>
 
     <section class="section" style="background:#0a0d12;border-top:1px solid var(--border)">
+      <span class="node"></span>
       <div class="container">
         <div class="section-head reveal"><h2>Frequently asked questions</h2></div>
         <div class="faq reveal">
@@ -311,6 +367,7 @@
     </section>
 
     <section class="cta-band">
+      <span class="node"></span>
       <div class="container reveal">
         <h2>Bring your whole season into one place.</h2>
         <p>Telemetry, results, calendar, weather, car &amp; costs — your complete motorsport companion.</p>
@@ -318,6 +375,7 @@
         <p class="hero-micro">14 days free · Cancel anytime</p>
       </div>
     </section>
+    </div><!-- /page-body -->
   </main>
 
   <!-- ===== CANONICAL FOOTER ===== -->
