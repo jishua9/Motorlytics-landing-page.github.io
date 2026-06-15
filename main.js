@@ -48,3 +48,69 @@ if (!reduce) {
     requestAnimationFrame(tick);
   });
 }
+
+// Stat band count-up
+(function() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statEls = document.querySelectorAll('.stat-val[data-stat]');
+  if (!statEls.length) return;
+
+  function countUp(el) {
+    const target = parseInt(el.getAttribute('data-stat'), 10);
+    if (isNaN(target) || reducedMotion) return; // ∞ has no data-stat
+    const dur = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min(1, (now - start) / dur);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * ease);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if ('IntersectionObserver' in window && !reducedMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          countUp(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    statEls.forEach((el) => io.observe(el));
+  } else {
+    // reduced motion or no IO: show final values immediately
+    statEls.forEach((el) => {
+      const t = el.getAttribute('data-stat');
+      if (t) el.textContent = t;
+    });
+  }
+})();
+
+// Draw-on chart trigger for feature tile SVG
+(function() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const chartLine = document.querySelector('.tile-chart-line');
+  if (!chartLine) return;
+
+  if (reducedMotion) {
+    chartLine.classList.add('drawn');
+    return;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          chartLine.classList.add('drawn');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(chartLine.closest('.tile') || chartLine);
+  } else {
+    chartLine.classList.add('drawn');
+  }
+})();
