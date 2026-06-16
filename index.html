@@ -38,7 +38,7 @@
       <div class="hero-copy">
         <p class="eyebrow">// Your complete motorsport companion</p>
         <h1 class="hero-h1">Every lap. Every corner. <span class="accent">Visualised.</span></h1>
-        <p class="hero-sub">Real-time telemetry overlays, lap analytics, and setup sheets — all in one place for club racers and teams.</p>
+        <p class="hero-sub">Telemetry overlays, lap analytics, and setup sheets — all in one place for club racers and teams.</p>
         <div class="hero-cta">
           <a class="btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
           <a class="btn-ghost" href="#features">See a sample session →</a>
@@ -209,40 +209,434 @@
           <h2>Everything in one platform</h2>
           <p>Stop juggling logger software, spreadsheets and paper. Motorlytics keeps your whole racing season in one place.</p>
         </div>
-        <div class="bento">
-          <div class="tile tile--feature reveal">
-            <div class="ico">📈</div>
-            <h3>Dash data &amp; telemetry</h3>
-            <p>Import MoTeC &amp; AiM data for lap charts, GPS track maps, corner-by-corner analysis, G-force and engine session-health gauges.</p>
-            <svg class="tile-chart" viewBox="0 0 300 48" preserveAspectRatio="none">
-              <polyline class="tile-chart-line" points="0,44 35,30 70,36 105,14 145,24 185,8 225,26 265,12 300,18"/>
-            </svg>
+        <div class="bento" id="bentoGrid">
+
+          <!-- TILE 0: Telemetry (default active = tile--feature) -->
+          <div class="tile tile--feature reveal" id="tile-0" data-tile="telemetry"
+               role="button" tabindex="0" aria-pressed="true" style="view-transition-name:tile0">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <h3>Dash data &amp; telemetry</h3>
+              <p>Import MoTeC &amp; AiM data for lap charts, GPS track maps, corner-by-corner analysis, G-force and engine session-health gauges.</p>
+            </div>
+            <div class="tile-demo" id="demo-telemetry" aria-hidden="false">
+              <div class="demo-telem">
+                <div class="demo-telem-readouts">
+                  <span class="demo-readout"><span class="demo-readout-label">BEST</span><span class="demo-readout-val" id="demoLapTime">1:07.8</span></span>
+                  <span class="demo-readout"><span class="demo-readout-label">TOP</span><span class="demo-readout-val" id="demoTopSpeed">183 km/h</span></span>
+                </div>
+                <svg class="demo-chart-svg" viewBox="0 0 280 72" preserveAspectRatio="none" id="demoChartSvg">
+                  <!-- Brake area (red, faint) -->
+                  <path class="demo-brake-area" id="demoBrakeArea"
+                    d="M0,72 L0,68 C20,68 28,65 40,60 C52,55 55,70 70,72 C80,73 90,68 105,65 C115,63 118,70 130,72 C140,73 145,68 160,65 C170,63 178,70 195,72 C205,73 210,68 225,65 C235,63 240,70 255,72 C265,73 270,68 280,65 L280,72 Z"
+                    style="fill:rgba(239,68,68,.18);stroke:none"/>
+                  <!-- Throttle area (green, faint) -->
+                  <path class="demo-throttle-area" id="demoThrottleArea"
+                    d="M0,72 L0,38 C18,28 30,32 45,20 C58,10 65,22 80,18 C92,15 98,30 115,24 C128,20 135,14 150,10 C162,7 170,20 185,16 C198,13 205,8 220,12 C232,10 242,18 260,14 C268,12 274,16 280,14 L280,72 Z"
+                    style="fill:rgba(34,197,94,.12);stroke:none"/>
+                  <!-- Speed line (orange) -->
+                  <polyline class="demo-speed-line" id="demoSpeedLine"
+                    points="0,58 18,44 35,50 52,26 70,34 88,16 105,28 122,20 140,36 158,18 175,12 192,22 210,30 228,16 245,22 263,14 280,20"
+                    style="fill:none;stroke:#ff8800;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(255,136,0,.7))"/>
+                  <!-- Playhead -->
+                  <line class="demo-playhead" id="demoPlayhead" x1="0" y1="0" x2="0" y2="72"
+                    style="stroke:rgba(255,255,255,.35);stroke-width:1;stroke-dasharray:3 3"/>
+                </svg>
+                <div class="demo-chart-labels">
+                  <span class="demo-ch-label speed">SPEED</span>
+                  <span class="demo-ch-label throttle">THROTTLE</span>
+                  <span class="demo-ch-label brake">BRAKE</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tile reveal">
-            <div class="ico">🏁</div>
-            <h3>Results &amp; timing</h3>
-            <p>Import from Natsoft or CSV — lap times, position charts, best-lap highlighting and career stats.</p>
+
+          <!-- TILE 1: Results -->
+          <div class="tile reveal" id="tile-1" data-tile="results"
+               role="button" tabindex="0" aria-pressed="false" style="view-transition-name:tile1">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/></svg></div>
+              <h3>Results &amp; timing</h3>
+              <p>Import from Natsoft or CSV — lap times, position charts, best-lap highlighting and career stats.</p>
+            </div>
+            <div class="tile-demo" id="demo-results" aria-hidden="true">
+              <div class="demo-rt-outer">
+                <div class="demo-rt-header">
+                  <span class="demo-rt-title">Race 1 — Formula Ford · Phillip Island</span>
+                  <span class="demo-rt-laps">12 Laps</span>
+                </div>
+                <table class="demo-rt-table">
+                  <thead>
+                    <tr>
+                      <th>Pos</th><th>#</th><th>Driver</th><th>Laps</th><th>Time / Gap</th><th>Best Lap</th><th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="demo-row demo-rt-user" data-row="0">
+                      <td class="demo-rt-pos">1</td>
+                      <td class="demo-rt-no">76</td>
+                      <td class="demo-rt-driver demo-rt-driver-user">J. Munro</td>
+                      <td class="demo-rt-lapsval">12</td>
+                      <td class="demo-rt-time">1:42.381</td>
+                      <td class="demo-rt-best demo-rt-fastest">1:38.902</td>
+                      <td class="demo-rt-status demo-rt-fin">Finished</td>
+                    </tr>
+                    <tr class="demo-row demo-rt-even" data-row="1">
+                      <td class="demo-rt-pos">2</td>
+                      <td class="demo-rt-no">14</td>
+                      <td class="demo-rt-driver">B. Cross</td>
+                      <td class="demo-rt-lapsval">12</td>
+                      <td class="demo-rt-time">+1.2s</td>
+                      <td class="demo-rt-best">1:39.441</td>
+                      <td class="demo-rt-status demo-rt-fin">Finished</td>
+                    </tr>
+                    <tr class="demo-row" data-row="2">
+                      <td class="demo-rt-pos">3</td>
+                      <td class="demo-rt-no">31</td>
+                      <td class="demo-rt-driver">T. Haines</td>
+                      <td class="demo-rt-lapsval">12</td>
+                      <td class="demo-rt-time">+3.8s</td>
+                      <td class="demo-rt-best">1:39.887</td>
+                      <td class="demo-rt-status demo-rt-fin">Finished</td>
+                    </tr>
+                    <tr class="demo-row demo-rt-even" data-row="3">
+                      <td class="demo-rt-pos">4</td>
+                      <td class="demo-rt-no">8</td>
+                      <td class="demo-rt-driver">C. Walsh</td>
+                      <td class="demo-rt-lapsval">12</td>
+                      <td class="demo-rt-time">+7.4s</td>
+                      <td class="demo-rt-best">1:40.214</td>
+                      <td class="demo-rt-status demo-rt-fin">Finished</td>
+                    </tr>
+                    <tr class="demo-row" data-row="4">
+                      <td class="demo-rt-pos">5</td>
+                      <td class="demo-rt-no">55</td>
+                      <td class="demo-rt-driver">A. Ryan</td>
+                      <td class="demo-rt-lapsval">12</td>
+                      <td class="demo-rt-time">+12.1s</td>
+                      <td class="demo-rt-best">1:40.998</td>
+                      <td class="demo-rt-status demo-rt-fin">Finished</td>
+                    </tr>
+                    <tr class="demo-row demo-rt-even" data-row="5">
+                      <td class="demo-rt-pos">6</td>
+                      <td class="demo-rt-no">22</td>
+                      <td class="demo-rt-driver">M. Ford</td>
+                      <td class="demo-rt-lapsval">8</td>
+                      <td class="demo-rt-time">—</td>
+                      <td class="demo-rt-best">1:42.017</td>
+                      <td class="demo-rt-status demo-rt-dnf">DNF</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="tile reveal">
-            <div class="ico">📅</div>
-            <h3>Race calendar</h3>
-            <p>Browse and join events, or sync the Motorsport Australia calendar. Set your number and category.</p>
+
+          <!-- TILE 2: Calendar -->
+          <div class="tile reveal" id="tile-2" data-tile="calendar"
+               role="button" tabindex="0" aria-pressed="false" style="view-transition-name:tile2">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <h3>Race calendar</h3>
+              <p>Browse and join events, or sync the Motorsport Australia calendar. Set your number and category.</p>
+            </div>
+            <div class="tile-demo" id="demo-calendar" aria-hidden="true">
+              <div class="demo-cal-wrap">
+                <!-- Current event highlight -->
+                <div class="demo-cal-current demo-cal-item">
+                  <div class="demo-cal-current-top">
+                    <div class="demo-cal-badges">
+                      <span class="demo-cal-pill-progress">In Progress</span>
+                      <span class="demo-cal-pill-ma">MA</span>
+                    </div>
+                    <div class="demo-cal-event-name">Motorsport Australia · Round 3</div>
+                    <div class="demo-cal-event-meta">Apr 5–7, 2026 &bull; Phillip Island</div>
+                  </div>
+                  <!-- Weather forecast strip -->
+                  <div class="demo-cal-weather">
+                    <div class="demo-cal-wx-day">
+                      <span class="demo-cal-wx-label">Fri</span>
+                      <svg class="demo-cal-wx-icon" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                      <span class="demo-cal-wx-temp">21°</span>
+                    </div>
+                    <div class="demo-cal-wx-day">
+                      <span class="demo-cal-wx-label">Sat</span>
+                      <svg class="demo-cal-wx-icon" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                      <span class="demo-cal-wx-temp">18°</span>
+                    </div>
+                    <div class="demo-cal-wx-day">
+                      <span class="demo-cal-wx-label">Sun</span>
+                      <svg class="demo-cal-wx-icon" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                      <span class="demo-cal-wx-temp">15°</span>
+                    </div>
+                    <div class="demo-cal-wx-day">
+                      <span class="demo-cal-wx-label">Mon</span>
+                      <svg class="demo-cal-wx-icon" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><line x1="8" y1="19" x2="8" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="16" y1="19" x2="16" y2="21"/></svg>
+                      <span class="demo-cal-wx-temp">12°</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Upcoming events list -->
+                <div class="demo-cal-upcoming-label">Upcoming Events</div>
+                <div class="demo-cal-item demo-cal-upcoming-row demo-row" data-row="0">
+                  <div class="demo-cal-row-name">Winton SuperSprint</div>
+                  <div class="demo-cal-row-meta">May 2–4 &bull; Winton</div>
+                </div>
+                <div class="demo-cal-item demo-cal-upcoming-row demo-row" data-row="1">
+                  <div class="demo-cal-row-name">Excel Series R2</div>
+                  <div class="demo-cal-row-meta">May 17 &bull; Calder</div>
+                </div>
+                <div class="demo-cal-item demo-cal-upcoming-row demo-row" data-row="2">
+                  <div class="demo-cal-row-name">Sandown Historics</div>
+                  <div class="demo-cal-row-meta">May 24–25 &bull; Sandown</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tile reveal">
-            <div class="ico">🌦️</div>
-            <h3>Pit wall &amp; weather</h3>
-            <p>Countdown, live weather, rain radar and the full session schedule for every event.</p>
+
+          <!-- TILE 3: Pit wall -->
+          <div class="tile reveal" id="tile-3" data-tile="pitwall"
+               role="button" tabindex="0" aria-pressed="false" style="view-transition-name:tile3">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></div>
+              <h3>Pit wall &amp; weather</h3>
+              <p>Countdown, live weather, rain radar and the full session schedule for every event.</p>
+            </div>
+            <div class="tile-demo" id="demo-pitwall" aria-hidden="true">
+              <div class="demo-pit">
+                <!-- Top strip: countdown + weather -->
+                <div class="demo-pit-top">
+                  <!-- Countdown box -->
+                  <div class="demo-pit-box demo-pit-countdown-box">
+                    <span class="demo-pit-label">NEXT SESSION</span>
+                    <span class="demo-pit-countdown" id="demoPitCountdown">00:14:32</span>
+                  </div>
+                  <!-- Weather box -->
+                  <div class="demo-pit-box demo-pit-weather-box">
+                    <div class="demo-pit-wx-main">
+                      <span class="demo-pit-temp">22°</span>
+                      <svg class="demo-pit-sun" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <line x1="12" y1="2" x2="12" y2="4"/>
+                        <line x1="12" y1="20" x2="12" y2="22"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="2" y1="12" x2="4" y2="12"/>
+                        <line x1="20" y1="12" x2="22" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                      </svg>
+                    </div>
+                    <span class="demo-pit-condition">Clear</span>
+                    <span class="demo-pit-wind">Wind 11 km/h NE</span>
+                  </div>
+                </div>
+                <!-- Sessions schedule -->
+                <div class="demo-pit-schedule">
+                  <div class="demo-pit-sched-header">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span class="demo-pit-sched-title">Sessions</span>
+                  </div>
+                  <!-- PRACTICE group -->
+                  <div class="demo-pit-group-label">PRACTICE</div>
+                  <!-- Practice 1 — completed -->
+                  <div class="demo-pit-row demo-pit-row-done demo-row" data-row="0">
+                    <svg class="demo-pit-row-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    <div class="demo-pit-row-body">
+                      <span class="demo-pit-row-name">Practice 1</span>
+                      <span class="demo-pit-row-time">8:00 – 8:30 AM</span>
+                    </div>
+                    <span class="demo-pit-row-bestlap">1:38.902</span>
+                  </div>
+                  <!-- Practice 2 — NEXT -->
+                  <div class="demo-pit-row demo-pit-row-next demo-row" data-row="1">
+                    <svg class="demo-pit-row-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                    <div class="demo-pit-row-body">
+                      <span class="demo-pit-row-name">Practice 2</span>
+                      <span class="demo-pit-row-time">8:45 – 9:15 AM</span>
+                    </div>
+                  </div>
+                  <!-- QUALIFYING group -->
+                  <div class="demo-pit-group-label">QUALIFYING</div>
+                  <!-- Qualifying — upcoming -->
+                  <div class="demo-pit-row demo-pit-row-upcoming demo-row" data-row="2">
+                    <svg class="demo-pit-row-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg>
+                    <div class="demo-pit-row-body">
+                      <span class="demo-pit-row-name">Qualifying</span>
+                      <span class="demo-pit-row-time">10:00 – 10:15 AM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tile reveal">
-            <div class="ico">🔧</div>
-            <h3>Car &amp; services</h3>
-            <p>Parts lifecycle, service records, tyre sets and odometer tracking — never miss a replacement.</p>
+
+          <!-- TILE 4: Car & services -->
+          <div class="tile reveal" id="tile-4" data-tile="car"
+               role="button" tabindex="0" aria-pressed="false" style="view-transition-name:tile4">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+              <h3>Car &amp; services</h3>
+              <p>Parts lifecycle, service records, tyre sets and odometer tracking — never miss a replacement.</p>
+            </div>
+            <div class="tile-demo" id="demo-car" aria-hidden="true">
+              <div class="demo-car">
+                <!-- Part card 1: Brake Pads — Healthy -->
+                <div class="demo-car-card demo-row" data-row="0">
+                  <div class="demo-car-card-header">
+                    <div class="demo-car-card-left">
+                      <span class="demo-car-part-name">Brake Pads</span>
+                      <span class="demo-car-part-sub">Brembo · PN P06015</span>
+                    </div>
+                    <span class="demo-car-badge demo-car-badge-healthy">Healthy</span>
+                  </div>
+                  <div class="demo-car-lifecycle-row">
+                    <span class="demo-car-lc-label">Lifecycle</span>
+                    <span class="demo-car-lc-val">250.5 / 500.0 km</span>
+                  </div>
+                  <div class="demo-car-bar-track">
+                    <div class="demo-car-bar demo-car-bar-green" style="--part-pct:50%"></div>
+                  </div>
+                  <div class="demo-car-meta-grid">
+                    <div>
+                      <span class="demo-car-meta-label">Installed</span>
+                      <span class="demo-car-meta-val">Mar 15, 2026</span>
+                    </div>
+                    <div>
+                      <span class="demo-car-meta-label">Remaining</span>
+                      <span class="demo-car-meta-val demo-car-meta-mono">249.5 km</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Part card 2: Tyres — Monitor -->
+                <div class="demo-car-card demo-row" data-row="1">
+                  <div class="demo-car-card-header">
+                    <div class="demo-car-card-left">
+                      <span class="demo-car-part-name">Tyres</span>
+                      <span class="demo-car-part-sub">Michelin S9</span>
+                    </div>
+                    <span class="demo-car-badge demo-car-badge-monitor">Monitor</span>
+                  </div>
+                  <div class="demo-car-lifecycle-row">
+                    <span class="demo-car-lc-label">Lifecycle</span>
+                    <span class="demo-car-lc-val">390.0 / 500.0 km</span>
+                  </div>
+                  <div class="demo-car-bar-track">
+                    <div class="demo-car-bar demo-car-bar-yellow" style="--part-pct:78%"></div>
+                  </div>
+                  <div class="demo-car-meta-grid">
+                    <div>
+                      <span class="demo-car-meta-label">Installed</span>
+                      <span class="demo-car-meta-val">Feb 28, 2026</span>
+                    </div>
+                    <div>
+                      <span class="demo-car-meta-label">Remaining</span>
+                      <span class="demo-car-meta-val demo-car-meta-mono">110.0 km</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Part card 3: Clutch — Replace Soon -->
+                <div class="demo-car-card demo-row" data-row="2">
+                  <div class="demo-car-card-header">
+                    <div class="demo-car-card-left">
+                      <span class="demo-car-part-name">Clutch</span>
+                      <span class="demo-car-part-sub">Stage 2</span>
+                    </div>
+                    <span class="demo-car-badge demo-car-badge-replace">Replace Soon</span>
+                  </div>
+                  <div class="demo-car-lifecycle-row">
+                    <span class="demo-car-lc-label">Lifecycle</span>
+                    <span class="demo-car-lc-val">462.0 / 500.0 km</span>
+                  </div>
+                  <div class="demo-car-bar-track">
+                    <div class="demo-car-bar demo-car-bar-orange" style="--part-pct:92%"></div>
+                  </div>
+                  <div class="demo-car-meta-grid">
+                    <div>
+                      <span class="demo-car-meta-label">Installed</span>
+                      <span class="demo-car-meta-val">Jan 10, 2026</span>
+                    </div>
+                    <div>
+                      <span class="demo-car-meta-label">Remaining</span>
+                      <span class="demo-car-meta-val demo-car-meta-mono">38.0 km</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="tile reveal">
-            <div class="ico">💲</div>
-            <h3>Racing costs</h3>
-            <p>Track parts and service spend across the whole season.</p>
+
+          <!-- TILE 5: Racing costs -->
+          <div class="tile reveal" id="tile-5" data-tile="costs"
+               role="button" tabindex="0" aria-pressed="false" style="view-transition-name:tile5">
+            <div class="tile-summary">
+              <div class="ico"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <h3>Racing costs</h3>
+              <p>Track parts and service spend across the whole season.</p>
+            </div>
+            <div class="tile-demo" id="demo-costs" aria-hidden="true">
+              <div class="demo-costs-card">
+                <!-- Card header -->
+                <div class="demo-costs-header">
+                  <div class="demo-costs-header-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <span class="demo-costs-card-title">Spending Summary</span>
+                  </div>
+                  <span class="demo-costs-year">2026</span>
+                </div>
+                <!-- Card body -->
+                <div class="demo-costs-body">
+                  <div class="demo-costs-total-label">Total Spend</div>
+                  <div class="demo-costs-total-val" id="demoCostsTotal">$18,750</div>
+                  <!-- Category rows -->
+                  <div class="demo-costs-cats">
+                    <div class="demo-costs-cat-row">
+                      <div class="demo-costs-cat-info">
+                        <span class="demo-costs-cat-name">Fuel &amp; Travel</span>
+                        <div class="demo-costs-bar-track"><div class="demo-costs-bar" style="--bar-w:35%"></div></div>
+                      </div>
+                      <div class="demo-costs-cat-right">
+                        <span class="demo-costs-cat-amt">$6,500</span>
+                        <span class="demo-costs-cat-pct">35%</span>
+                      </div>
+                    </div>
+                    <div class="demo-costs-cat-row">
+                      <div class="demo-costs-cat-info">
+                        <span class="demo-costs-cat-name">Maintenance</span>
+                        <div class="demo-costs-bar-track"><div class="demo-costs-bar" style="--bar-w:28%"></div></div>
+                      </div>
+                      <div class="demo-costs-cat-right">
+                        <span class="demo-costs-cat-amt">$5,250</span>
+                        <span class="demo-costs-cat-pct">28%</span>
+                      </div>
+                    </div>
+                    <div class="demo-costs-cat-row">
+                      <div class="demo-costs-cat-info">
+                        <span class="demo-costs-cat-name">Tyres &amp; Parts</span>
+                        <div class="demo-costs-bar-track"><div class="demo-costs-bar" style="--bar-w:22%"></div></div>
+                      </div>
+                      <div class="demo-costs-cat-right">
+                        <span class="demo-costs-cat-amt">$4,200</span>
+                        <span class="demo-costs-cat-pct">22%</span>
+                      </div>
+                    </div>
+                    <div class="demo-costs-cat-row">
+                      <div class="demo-costs-cat-info">
+                        <span class="demo-costs-cat-name">Entry Fees</span>
+                        <div class="demo-costs-bar-track"><div class="demo-costs-bar" style="--bar-w:15%"></div></div>
+                      </div>
+                      <div class="demo-costs-cat-right">
+                        <span class="demo-costs-cat-amt">$2,800</span>
+                        <span class="demo-costs-cat-pct">15%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="demo-costs-link" href="#">View Finances →</a>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
