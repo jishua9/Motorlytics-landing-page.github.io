@@ -430,3 +430,28 @@ if (!reduce) {
     }
   }
 })();
+
+// =====================================================================
+// DEEP-DIVE COMPONENT ANIMATIONS — add .in-view when scrolled into view
+// =====================================================================
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ddEls = document.querySelectorAll('.dd-telem, .dd-car');
+  if (!ddEls.length) return;
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    ddEls.forEach((el) => el.classList.add('in-view'));
+    return;
+  }
+
+  const ddIo = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        ddIo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  ddEls.forEach((el) => ddIo.observe(el));
+})();

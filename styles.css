@@ -1940,3 +1940,471 @@ h2, h3 { letter-spacing: -0.3px; }
   .rail::after { animation: none; }
   .node { animation: none; }
 }
+
+/* ====================== DEEP-DIVE COMPONENT: TELEMETRY ====================== */
+.dd-telem {
+  position: relative;
+  background: #0D1117;
+  padding: 8px 8px 0;
+}
+.dd-telem-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* Lap selector overlay */
+.dd-telem-selector {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(13,17,23,.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid #2a2f37;
+  border-radius: 8px;
+  width: 152px;
+  overflow: hidden;
+  z-index: 2;
+}
+.dd-telem-sel-header {
+  padding: 7px 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: .75rem;
+  color: #B5B9BD;
+  border-bottom: 1px solid #2a2f37;
+}
+.dd-telem-sel-list {
+  padding: 4px 0;
+}
+.dd-telem-sel-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+}
+.dd-telem-sel-row.dd-sel-active {
+  background: rgba(27,33,41,.5);
+}
+.dd-telem-checkbox {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #2a2f37;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dd-cb-checked {
+  background: #ff8800;
+  border-color: #ff8800;
+}
+.dd-cb-checked svg {
+  width: 10px;
+  height: 10px;
+}
+.dd-telem-swatch {
+  width: 12px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.dd-sel-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .72rem;
+  color: #B5B9BD;
+  flex: 1;
+}
+.dd-sel-dim { color: #9d9d9d; }
+.dd-sel-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #B5B9BD;
+  margin-left: auto;
+}
+/* Speed trace animation */
+.dd-trace {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1);
+}
+.dd-telem.in-view .dd-trace-blue  { stroke-dashoffset: 0; }
+.dd-telem.in-view .dd-trace-red   { stroke-dashoffset: 0; transition-delay: .2s; }
+.dd-telem.in-view .dd-trace-green { stroke-dashoffset: 0; transition-delay: .4s; }
+@media (prefers-reduced-motion: reduce) {
+  .dd-trace { stroke-dasharray: none; stroke-dashoffset: 0; }
+}
+/* Legend */
+.dd-telem-legend {
+  display: flex;
+  gap: 16px;
+  padding: 8px 8px 10px;
+  background: #0D1117;
+}
+.dd-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dd-legend-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+.dd-legend-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .72rem;
+  color: #B5B9BD;
+}
+.dd-legend-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #9d9d9d;
+}
+
+/* ====================== DEEP-DIVE COMPONENT: PIT WALL ====================== */
+.dd-pit {
+  background: #0D1117;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dd-pit-top {
+  display: flex;
+  gap: 8px;
+}
+/* Current conditions box */
+.dd-pit-current {
+  flex-shrink: 0;
+  width: 130px;
+  background: #1b2129;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.dd-pit-date {
+  font-family: 'Outfit', sans-serif;
+  font-size: .68rem;
+  color: #9d9d9d;
+}
+.dd-pit-temp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.dd-pit-temp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #B5B9BD;
+  line-height: 1;
+}
+.dd-pit-cond {
+  font-family: 'Outfit', sans-serif;
+  font-size: .8rem;
+  color: #B5B9BD;
+  margin-top: 4px;
+}
+.dd-pit-hi-lo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: #9d9d9d;
+  margin-top: 4px;
+}
+/* Forecast strip */
+.dd-pit-forecast {
+  flex: 1;
+  background: #1b2129;
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+}
+.dd-pit-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 2px;
+  border-radius: 6px;
+  background: #0D1117;
+}
+.dd-pit-day-today {
+  background: rgba(255,136,0,.1);
+  box-shadow: inset 0 0 0 1px rgba(255,136,0,.3);
+}
+.dd-day-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .68rem;
+  font-weight: 500;
+  color: #B5B9BD;
+}
+.dd-day-today-label { color: #ff8800; }
+.dd-day-temps {
+  display: flex;
+  gap: 3px;
+  align-items: baseline;
+}
+.dd-day-max {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  font-weight: 500;
+  color: #B5B9BD;
+}
+.dd-day-min {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: #9d9d9d;
+}
+.dd-day-rain {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: #06b6d4;
+}
+/* Hourly timeline */
+.dd-pit-hourly {
+  background: #1b2129;
+  border-radius: 8px;
+  padding: 8px 10px 4px;
+}
+.dd-hourly-slots {
+  display: flex;
+  justify-content: space-between;
+}
+.dd-hourly-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.dd-hour-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .65rem;
+  color: #9d9d9d;
+}
+.dd-hour-temp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: #B5B9BD;
+}
+.dd-hourly-chart {
+  width: 100%;
+  height: 32px;
+  display: block;
+  margin-top: 2px;
+}
+/* Metric cards */
+.dd-pit-metrics {
+  display: flex;
+  gap: 8px;
+}
+.dd-pit-metric {
+  flex: 1;
+  background: #1b2129;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.dd-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Outfit', sans-serif;
+  font-size: .65rem;
+  color: #9d9d9d;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 4px;
+}
+.dd-metric-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #B5B9BD;
+  display: block;
+}
+.dd-metric-val small {
+  font-size: .65rem;
+  color: #9d9d9d;
+}
+.dd-metric-bar-track {
+  margin-top: 6px;
+  height: 4px;
+  background: #2a2f37;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.dd-metric-bar {
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* ====================== DEEP-DIVE COMPONENT: CAR & COSTS ====================== */
+.dd-car {
+  background: #0D1117;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.dd-car-card {
+  border-radius: 0;
+  overflow: hidden;
+}
+.dd-car-header {
+  background: linear-gradient(to bottom, #010409, #0a0d12);
+  border-bottom: 1px solid #2a2f37;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dd-car-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: .8rem;
+  font-weight: 500;
+  color: #F5F5F6;
+  display: block;
+}
+.dd-car-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: .68rem;
+  color: #9d9d9d;
+  display: block;
+}
+.dd-parts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .8rem;
+}
+.dd-parts-table thead tr {
+  background: #1b2129;
+}
+.dd-parts-table th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: .72rem;
+  color: #B5B9BD;
+  padding: 7px 12px;
+  text-align: left;
+}
+.dd-parts-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #2a2f37;
+  vertical-align: top;
+}
+.dd-parts-table tr:last-child td {
+  border-bottom: none;
+}
+.dd-part-name {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: .82rem;
+  color: #B5B9BD;
+}
+.dd-part-cat {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: .68rem;
+  color: #9d9d9d;
+}
+/* Lifecycle bar */
+.dd-lc-track {
+  height: 7px;
+  background: #2a2f37;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dd-lc-bar {
+  height: 100%;
+  border-radius: 4px;
+  width: 0;
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+}
+.dd-car.in-view .dd-lc-bar {
+  width: var(--lc-w);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dd-lc-bar { width: var(--lc-w) !important; transition: none; }
+}
+.dd-lc-green  { background: #22c55e; }
+.dd-lc-yellow { background: #eab308; }
+.dd-lc-orange { background: #f59e0b; }
+.dd-lc-km {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  color: #9d9d9d;
+  margin-top: 3px;
+}
+/* Status badges */
+.dd-badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: .68rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.dd-badge-green  { border-color: #22c55e; color: #22c55e; }
+.dd-badge-yellow { border-color: #eab308; color: #eab308; }
+.dd-badge-orange { border-color: #f59e0b; color: #f59e0b; }
+/* Spending strip */
+.dd-spend {
+  padding: 10px 12px;
+  border-top: 1px solid #2a2f37;
+  background: #0D1117;
+}
+.dd-spend-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.dd-spend-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .7rem;
+  color: #9d9d9d;
+}
+.dd-spend-total {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  color: #F5F5F6;
+}
+.dd-seg-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  gap: 1px;
+}
+.dd-seg-slice {
+  height: 100%;
+}
+.dd-seg-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 6px;
+}
+.dd-seg-legend span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Outfit', sans-serif;
+  font-size: .65rem;
+  color: #9d9d9d;
+}
+.dd-seg-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dd-seg-legend b {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}

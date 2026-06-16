@@ -656,12 +656,102 @@
             <div class="row-media">
               <div class="telem-screen">
                 <div class="telem-screen-bar">
-                  <span class="telem-screen-title">TELEMETRY</span>
+                  <span class="telem-screen-title">SPEED TRACE</span>
                   <span class="telem-screen-live">● LIVE</span>
                 </div>
-                <figure class="shot" data-shot="Telemetry · charts &amp; corner analysis">
-                  <img src="images/feature-telemetry.png" alt="Telemetry charts and corner analysis" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
-                </figure>
+                <div class="dd-telem">
+  <!-- Lap selector overlay (absolute positioned inside chart area) -->
+  <div class="dd-telem-selector">
+    <div class="dd-telem-sel-header">Laps (3/11)</div>
+    <div class="dd-telem-sel-list">
+      <!-- Selected laps (orange checkbox) -->
+      <div class="dd-telem-sel-row dd-sel-active">
+        <div class="dd-telem-checkbox dd-cb-checked"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dd-telem-swatch" style="background:#3b82f6"></div>
+        <span class="dd-sel-label">Lap 5</span>
+        <span class="dd-sel-time">1:39.4</span>
+      </div>
+      <div class="dd-telem-sel-row dd-sel-active">
+        <div class="dd-telem-checkbox dd-cb-checked"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dd-telem-swatch" style="background:#ef4444"></div>
+        <span class="dd-sel-label">Lap 8</span>
+        <span class="dd-sel-time">1:38.9</span>
+      </div>
+      <div class="dd-telem-sel-row dd-sel-active">
+        <div class="dd-telem-checkbox dd-cb-checked"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="dd-telem-swatch" style="background:#22c55e"></div>
+        <span class="dd-sel-label">Lap 11</span>
+        <span class="dd-sel-time">1:39.1</span>
+      </div>
+      <!-- Unselected laps -->
+      <div class="dd-telem-sel-row">
+        <div class="dd-telem-checkbox"></div>
+        <div class="dd-telem-swatch" style="background:transparent"></div>
+        <span class="dd-sel-label dd-sel-dim">Lap 3</span>
+        <span class="dd-sel-time dd-sel-dim">1:40.2</span>
+      </div>
+      <div class="dd-telem-sel-row">
+        <div class="dd-telem-checkbox"></div>
+        <div class="dd-telem-swatch" style="background:transparent"></div>
+        <span class="dd-sel-label dd-sel-dim">Lap 7</span>
+        <span class="dd-sel-time dd-sel-dim">1:41.0</span>
+      </div>
+    </div>
+  </div>
+  <!-- SVG Chart -->
+  <svg class="dd-telem-svg" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="360" height="200" fill="#0D1117"/>
+    <!-- Grid lines -->
+    <line x1="40" y1="20" x2="350" y2="20" stroke="#1e2128" stroke-dasharray="3,3"/>
+    <line x1="40" y1="57" x2="350" y2="57" stroke="#1e2128" stroke-dasharray="3,3"/>
+    <line x1="40" y1="94" x2="350" y2="94" stroke="#1e2128" stroke-dasharray="3,3"/>
+    <line x1="40" y1="131" x2="350" y2="131" stroke="#1e2128" stroke-dasharray="3,3"/>
+    <line x1="40" y1="168" x2="350" y2="168" stroke="#1e2128" stroke-dasharray="3,3"/>
+    <!-- Y axis labels (speed) -->
+    <text x="6" y="23" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">200</text>
+    <text x="6" y="60" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">150</text>
+    <text x="6" y="97" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">100</text>
+    <text x="12" y="134" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">50</text>
+    <text x="17" y="171" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">0</text>
+    <!-- X axis labels (distance km) -->
+    <text x="40" y="188" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">0</text>
+    <text x="107" y="188" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">1</text>
+    <text x="175" y="188" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">2</text>
+    <text x="242" y="188" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">3</text>
+    <text x="310" y="188" fill="#7a7f87" font-size="9" font-family="'JetBrains Mono',monospace">4 km</text>
+    <!-- Y axis line -->
+    <line x1="40" y1="20" x2="40" y2="175" stroke="#2a2f37"/>
+    <!-- X axis line -->
+    <line x1="40" y1="168" x2="350" y2="168" stroke="#2a2f37"/>
+    <!-- Lap 5 (blue) - typical lap -->
+    <polyline class="dd-trace dd-trace-blue" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      points="40,94 55,80 70,50 85,38 100,30 115,28 125,28 130,148 138,130 145,110 150,100 158,90 165,85 172,82 180,128 188,110 195,90 202,80 210,75 218,72 225,128 232,110 240,95 248,85 255,78 263,75 270,70 278,72 285,75 295,80 305,85 315,88 325,95 330,108 335,120 340,130 345,140 350,148"/>
+    <!-- Lap 8 (red) - fastest lap, slightly faster on straights -->
+    <polyline class="dd-trace dd-trace-red" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      points="40,96 55,82 70,52 85,40 100,28 115,26 125,26 130,145 138,128 145,108 150,97 158,87 165,82 172,79 180,125 188,106 195,87 202,77 210,72 218,69 225,125 232,107 240,92 248,82 255,75 263,72 270,67 278,69 285,72 295,77 305,82 315,85 325,92 330,105 335,117 340,127 345,137 350,145"/>
+    <!-- Lap 11 (green) - slightly off-pace -->
+    <polyline class="dd-trace dd-trace-green" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      points="40,92 55,78 70,48 85,36 100,32 115,30 125,30 130,151 138,132 145,112 150,103 158,93 165,88 172,85 180,131 188,113 195,93 202,83 210,78 218,75 225,131 232,113 240,97 248,88 255,81 263,78 270,73 278,75 285,78 295,83 305,88 315,91 325,98 330,111 335,123 340,133 345,143 350,151"/>
+  </svg>
+  <!-- Legend -->
+  <div class="dd-telem-legend">
+    <div class="dd-legend-item">
+      <span class="dd-legend-swatch" style="background:#3b82f6"></span>
+      <span class="dd-legend-label">Lap 5</span>
+      <span class="dd-legend-time">1:39.4</span>
+    </div>
+    <div class="dd-legend-item">
+      <span class="dd-legend-swatch" style="background:#ef4444"></span>
+      <span class="dd-legend-label">Lap 8</span>
+      <span class="dd-legend-time">1:38.9</span>
+    </div>
+    <div class="dd-legend-item">
+      <span class="dd-legend-swatch" style="background:#22c55e"></span>
+      <span class="dd-legend-label">Lap 11</span>
+      <span class="dd-legend-time">1:39.1</span>
+    </div>
+  </div>
+</div>
               </div>
             </div>
           </div>
@@ -679,9 +769,114 @@
                   <span class="telem-screen-title">PIT WALL</span>
                   <span class="telem-screen-live">● LIVE</span>
                 </div>
-                <figure class="shot" data-shot="Pit wall · weather &amp; schedule">
-                  <img src="images/feature-pitwall.png" alt="Pit Wall dashboard with weather and schedule" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
-                </figure>
+                <div class="dd-pit">
+  <!-- Top row: current + forecast strip -->
+  <div class="dd-pit-top">
+    <!-- Current conditions -->
+    <div class="dd-pit-current">
+      <div class="dd-pit-date">Sun 14 Jun</div>
+      <div class="dd-pit-temp-row">
+        <span class="dd-pit-temp">22°</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <div class="dd-pit-cond">Clear</div>
+      <div class="dd-pit-hi-lo">H: 24°&nbsp;&nbsp;·&nbsp;&nbsp;L: 12°</div>
+    </div>
+    <!-- Forecast strip -->
+    <div class="dd-pit-forecast">
+      <div class="dd-pit-day">
+        <span class="dd-day-label">Fri</span>
+        <!-- partly cloudy icon -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4" stroke="#eab308"/><path d="M6 15a4 4 0 0 1 4-4h6a3 3 0 0 1 0 6H9" stroke="#B5B9BD"/></svg>
+        <div class="dd-day-temps"><span class="dd-day-max">21°</span><span class="dd-day-min">11°</span></div>
+      </div>
+      <div class="dd-pit-day dd-pit-day-today">
+        <span class="dd-day-label dd-day-today-label">Today</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <div class="dd-day-temps"><span class="dd-day-max">22°</span><span class="dd-day-min">12°</span></div>
+      </div>
+      <div class="dd-pit-day">
+        <span class="dd-day-label">Sun</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/></svg>
+        <div class="dd-day-temps"><span class="dd-day-max">19°</span><span class="dd-day-min">10°</span></div>
+        <span class="dd-day-rain">20%</span>
+      </div>
+      <div class="dd-pit-day">
+        <span class="dd-day-label">Mon</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="19" x2="8" y2="21"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="16" y1="19" x2="16" y2="21"/></svg>
+        <div class="dd-day-temps"><span class="dd-day-max">17°</span><span class="dd-day-min">9°</span></div>
+        <span class="dd-day-rain">45%</span>
+      </div>
+    </div>
+  </div>
+  <!-- Hourly timeline -->
+  <div class="dd-pit-hourly">
+    <div class="dd-hourly-slots">
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">Now</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="dd-hour-temp">18°</span>
+      </div>
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">10am</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="dd-hour-temp">20°</span>
+      </div>
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">12pm</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="dd-hour-temp">22°</span>
+      </div>
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">2pm</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="dd-hour-temp">23°</span>
+      </div>
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">4pm</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="dd-hour-temp">21°</span>
+      </div>
+      <div class="dd-hourly-slot">
+        <span class="dd-hour-label">6pm</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="dd-hour-temp">19°</span>
+      </div>
+    </div>
+    <!-- Temperature area chart (SVG) -->
+    <svg class="dd-hourly-chart" viewBox="0 0 300 36" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="ddTempGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>
+      <!-- Temps: 18,20,22,23,21,19 mapped to y: min=18,max=23 → y=30-(val-18)/5*26 -->
+      <!-- 18→30, 20→19.6, 22→9.2, 23→4, 21→14.8, 19→24.8 -->
+      <polygon fill="url(#ddTempGrad)" points="0,30 60,19.6 120,9.2 180,4 240,14.8 300,24.8 300,36 0,36"/>
+      <polyline fill="none" stroke="#f59e0b" stroke-width="1.5" points="0,30 60,19.6 120,9.2 180,4 240,14.8 300,24.8"/>
+    </svg>
+  </div>
+  <!-- Metric cards -->
+  <div class="dd-pit-metrics">
+    <div class="dd-pit-metric">
+      <div class="dd-metric-header">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+        <span>Wind</span>
+      </div>
+      <span class="dd-metric-val">11 <small>km/h</small></span>
+      <div class="dd-metric-bar-track"><div class="dd-metric-bar" style="width:22%;background:#3b82f6"></div></div>
+    </div>
+    <div class="dd-pit-metric">
+      <div class="dd-metric-header">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12a10 10 0 0 1 10-10z"/><path d="M12 6v6l4 2"/></svg>
+        <span>Humidity</span>
+      </div>
+      <span class="dd-metric-val">64 <small>%</small></span>
+      <div class="dd-metric-bar-track"><div class="dd-metric-bar" style="width:64%;background:#06b6d4"></div></div>
+    </div>
+  </div>
+</div>
               </div>
             </div>
           </div>
@@ -699,9 +894,83 @@
                   <span class="telem-screen-title">CAR &amp; COSTS</span>
                   <span class="telem-screen-live">● READY</span>
                 </div>
-                <figure class="shot" data-shot="Car · parts, services &amp; costs">
-                  <img src="images/feature-car-costs.png" alt="Car profile with parts lifecycle and cost tracking" loading="lazy" onerror="this.remove();this.parentNode.classList.add('shot--empty')">
-                </figure>
+                <div class="dd-car">
+  <!-- Parts table card -->
+  <div class="dd-car-card">
+    <div class="dd-car-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      <div>
+        <span class="dd-car-title">Parts (6)</span>
+        <span class="dd-car-subtitle">Active · 3 needing attention</span>
+      </div>
+    </div>
+    <table class="dd-parts-table">
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Lifecycle</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="dd-part-name">Brake Pads</span>
+            <span class="dd-part-cat">Brakes</span>
+          </td>
+          <td>
+            <div class="dd-lc-track"><div class="dd-lc-bar dd-lc-green in-view-target" style="--lc-w:50%"></div></div>
+            <span class="dd-lc-km">250.5 / 500.0 km</span>
+          </td>
+          <td><span class="dd-badge dd-badge-green">Healthy</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="dd-part-name">Tyres</span>
+            <span class="dd-part-cat">Wheels</span>
+          </td>
+          <td>
+            <div class="dd-lc-track"><div class="dd-lc-bar dd-lc-yellow in-view-target" style="--lc-w:78%"></div></div>
+            <span class="dd-lc-km">390.0 / 500.0 km</span>
+          </td>
+          <td><span class="dd-badge dd-badge-yellow">Monitor</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="dd-part-name">Clutch</span>
+            <span class="dd-part-cat">Drivetrain</span>
+          </td>
+          <td>
+            <div class="dd-lc-track"><div class="dd-lc-bar dd-lc-orange in-view-target" style="--lc-w:92%"></div></div>
+            <span class="dd-lc-km">460.0 / 500.0 km</span>
+          </td>
+          <td><span class="dd-badge dd-badge-orange">Replace Soon</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Spending strip -->
+  <div class="dd-spend">
+    <div class="dd-spend-top">
+      <span class="dd-spend-label">Season spend</span>
+      <span class="dd-spend-total">$18,750</span>
+    </div>
+    <div class="dd-spend-seg">
+      <div class="dd-seg-bar">
+        <div class="dd-seg-slice" style="width:35%;background:#f59e0b;border-radius:4px 0 0 4px"></div>
+        <div class="dd-seg-slice" style="width:28%;background:#ef4444"></div>
+        <div class="dd-seg-slice" style="width:22%;background:#3b82f6"></div>
+        <div class="dd-seg-slice" style="width:15%;background:#7a7f87;border-radius:0 4px 4px 0"></div>
+      </div>
+      <div class="dd-seg-legend">
+        <span><i style="background:#f59e0b"></i>Fuel &amp; Travel <b>35%</b></span>
+        <span><i style="background:#ef4444"></i>Maintenance <b>28%</b></span>
+        <span><i style="background:#3b82f6"></i>Entry Fees <b>22%</b></span>
+        <span><i style="background:#7a7f87"></i>Other <b>15%</b></span>
+      </div>
+    </div>
+  </div>
+</div>
               </div>
             </div>
           </div>
