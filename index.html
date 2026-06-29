@@ -37,133 +37,806 @@
       <!-- hero copy -->
       <div class="hero-copy">
         <p class="eyebrow">// Your complete motorsport companion</p>
-        <h1 class="hero-h1">Every lap. Every corner. <span class="accent">Visualised.</span></h1>
-        <p class="hero-sub">Telemetry overlays, lap analytics, and setup sheets — all in one place for club racers and teams.</p>
+        <h1 class="hero-h1">Your setup. Your data. What actually made you <span class="accent">faster.</span></h1>
+        <p class="hero-sub">Motorlytics links your setup, telemetry, weather and results — then shows you what was fast in conditions like today.</p>
         <div class="hero-cta">
           <a class="btn-primary" href="https://app.motorlytics.com.au/register">Start free trial</a>
           <a class="btn-ghost" href="#features">See a sample session →</a>
         </div>
+        <!-- Walkthrough controls -->
+        <div class="wt-controls">
+          <p class="wt-caption" id="wtCaption">Log your setup — and see what was fast in weather like today.</p>
+          <div class="wt-dots-row">
+            <button class="wt-dot" data-wt-stage="0" aria-label="Pit wall stage" title="Pit wall"></button>
+            <button class="wt-dot wt-dot-active" data-wt-stage="1" aria-label="Setup stage" title="Setup"></button>
+            <button class="wt-dot" data-wt-stage="2" aria-label="Correlation stage" title="Correlation"></button>
+            <button class="wt-dot" data-wt-stage="3" aria-label="Telemetry stage" title="Telemetry"></button>
+            <button class="wt-dot" data-wt-stage="4" aria-label="Results stage" title="Results"></button>
+            <button class="wt-replay" id="wtReplay" aria-label="Pause auto-advance" title="Pause">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- telemetry panel -->
-      <div class="telem-panel" id="telemPanel">
+      <!-- walkthrough stage stack -->
+      <div class="wt-stage-wrap" id="wtStageWrap">
 
-        <!-- ── MAP AREA (dominant, 16:9, ~72% panel height) ──────── -->
-        <div class="map-area">
+        <!-- STAGE 0: Pit wall — Dashboard tab recreation -->
+        <div class="wt-stage" data-stage="pitwall">
+          <div class="wt-pw-panel">
 
-          <!-- satellite image + canvas overlay fills the area -->
-          <div class="map-wrapper" id="mapWrapper">
-            <img id="trackImg" src="assets/track-satellite.png" alt="Calder Park satellite view" />
-            <canvas id="mapCanvas"></canvas>
-          </div>
-
-          <!-- FLOAT top-left: info + live readouts -->
-          <div class="float-card float-info">
-            <div class="float-header">
-              <span class="float-track-name">CALDER PARK · QUALIFYING</span>
-              <div class="float-laptime-row">
-                <span class="live-dot"></span>
-                <span class="float-lap-mono">LAP 9 · 1:07.783</span>
-              </div>
-            </div>
-            <div class="float-speed-block">
-              <span class="speed-value" id="speedVal">000</span>
-              <span class="speed-unit">km/h</span>
-            </div>
-            <div class="float-channels">
-              <div class="channel-row">
-                <span class="channel-label">THROTTLE</span>
-                <div class="bar-track">
-                  <div class="bar-fill throttle" id="throttleBar" style="width:0%"></div>
+            <!-- Title bar -->
+            <div class="wt-pw-titlebar">
+              <div class="wt-pw-tb-left">
+                <div class="wt-pw-track-thumb">T</div>
+                <div class="wt-pw-tb-info">
+                  <span class="wt-pw-event-name">Victorian Trophy Tour Rd 1 Wolfchester Sandown Challenge</span>
+                  <span class="wt-pw-event-sub">Sandown International Raceway · Feb 14 – Feb 15, 2026</span>
+                  <span class="wt-pw-event-car">#76 Formula Vee</span>
                 </div>
-                <span class="channel-val green" id="throttleVal">0%</span>
               </div>
-              <div class="channel-row">
-                <span class="channel-label">BRAKE</span>
-                <div class="bar-track">
-                  <div class="bar-fill brake" id="brakeBar" style="width:0%"></div>
+              <div class="wt-pw-tb-right">
+                <span class="wt-pw-next-label">No upcoming sessions</span>
+                <span class="wt-pw-next-sub">Add a session to get started</span>
+              </div>
+            </div>
+
+            <!-- Tab nav -->
+            <div class="wt-pw-tabs">
+              <button class="wt-pw-tab wt-pw-tab-active">Dashboard</button>
+              <button class="wt-pw-tab">Weather</button>
+              <button class="wt-pw-tab">Analytics</button>
+              <button class="wt-pw-tab">Circuit</button>
+              <span class="wt-pw-tab-settings">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Settings
+              </span>
+            </div>
+
+            <!-- 3-column grid body -->
+            <div class="wt-pw-body">
+
+              <!-- LEFT col: Sessions + Action Items -->
+              <div class="wt-pw-col wt-pw-col-left">
+
+                <!-- Sessions card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="0">
+                  <div class="wt-pw-card-hdr">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span class="wt-pw-card-title">Sessions</span>
+                    <span class="wt-pw-add-pill">+ Add Session</span>
+                  </div>
+                  <div class="wt-pw-srows">
+                    <div class="wt-pw-group-label">QUALIFYING</div>
+                    <div class="wt-pw-srow wt-pw-srow-done wt-pit-srow-item">
+                      <svg class="wt-pw-srow-check" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      <div class="wt-pw-srow-body">
+                        <span class="wt-pw-srow-name">Qualifying 1</span>
+                        <span class="wt-pw-srow-time">Feb 14 11:45 – 12:02</span>
+                      </div>
+                      <div class="wt-pw-srow-right">
+                        <span class="wt-pw-srow-best">1:32.806</span>
+                        <span class="wt-pw-srow-delta">+1.3s · avg +1.7s</span>
+                      </div>
+                    </div>
+                    <div class="wt-pw-group-label">RACE</div>
+                    <div class="wt-pw-srow wt-pw-srow-done wt-pit-srow-item">
+                      <svg class="wt-pw-srow-check" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      <div class="wt-pw-srow-body">
+                        <span class="wt-pw-srow-name">Race 1</span>
+                        <span class="wt-pw-srow-time">Feb 14 15:00 – 15:15</span>
+                      </div>
+                      <div class="wt-pw-srow-right">
+                        <span class="wt-pw-srow-best">1:31.600</span>
+                        <span class="wt-pw-srow-delta">+0.1s · avg -0.1s</span>
+                      </div>
+                    </div>
+                    <div class="wt-pw-srow wt-pw-srow-done wt-pit-srow-item">
+                      <svg class="wt-pw-srow-check" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      <div class="wt-pw-srow-body">
+                        <span class="wt-pw-srow-name">Race 2</span>
+                        <span class="wt-pw-srow-time">Feb 15 10:55 – 11:13</span>
+                      </div>
+                      <div class="wt-pw-srow-right">
+                        <span class="wt-pw-srow-best">1:31.936</span>
+                        <span class="wt-pw-srow-delta">+9.4s · avg +1.5s</span>
+                      </div>
+                    </div>
+                    <div class="wt-pw-srow wt-pw-srow-done wt-pit-srow-item">
+                      <svg class="wt-pw-srow-check" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      <div class="wt-pw-srow-body">
+                        <span class="wt-pw-srow-name">Race 3</span>
+                        <span class="wt-pw-srow-time">Feb 15 15:00 – 15:18</span>
+                      </div>
+                      <div class="wt-pw-srow-right">
+                        <span class="wt-pw-srow-best">1:31.494</span>
+                        <span class="wt-pw-baseline-tag">BASELINE</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <span class="channel-val red" id="brakeVal">0%</span>
+
+                <!-- Action Items card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="1">
+                  <div class="wt-pw-card-hdr">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    <span class="wt-pw-card-title">Action Items</span>
+                    <svg class="wt-pw-hdr-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    <span class="wt-pw-add-icon">+</span>
+                  </div>
+                  <div class="wt-pw-ai-body">
+                    <div class="wt-pw-ai-input">Add action item…</div>
+                    <div class="wt-pw-empty">No action items for this event</div>
+                  </div>
+                </div>
+
               </div>
-              <div class="channel-row">
-                <span class="channel-label">RPM</span>
-                <span class="channel-val mono" id="rpmVal">0000</span>
+
+              <!-- CENTER col: Weather + Results/Lap Times -->
+              <div class="wt-pw-col wt-pw-col-center">
+
+                <!-- Weather card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="2">
+                  <div class="wt-pw-card-hdr">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                    <span class="wt-pw-card-title">Weather</span>
+                  </div>
+                  <div class="wt-pw-wx-body">
+                    <div class="wt-pw-wx-top">
+                      <div class="wt-pw-wx-tempblock">
+                        <span class="wt-pw-wx-temp">14.2°C</span>
+                        <span class="wt-pw-wx-feels">Feels like 13.7°C</span>
+                      </div>
+                      <div class="wt-pw-wx-cond">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9d9d9d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                        <span>Overcast Clouds</span>
+                      </div>
+                      <div class="wt-pw-wx-stats">
+                        <div class="wt-pw-wx-stat"><span class="wt-pw-wx-lbl">Track</span><span class="wt-pw-wx-val">19.2°C</span><span class="wt-pw-wx-dry">Dry</span></div>
+                        <div class="wt-pw-wx-stat"><span class="wt-pw-wx-lbl">Wind</span><span class="wt-pw-wx-val">2 km/h</span></div>
+                        <div class="wt-pw-wx-stat"><span class="wt-pw-wx-lbl">Humidity</span><span class="wt-pw-wx-val">77%</span></div>
+                        <div class="wt-pw-wx-stat"><span class="wt-pw-wx-lbl">Rain</span><span class="wt-pw-wx-val">0 mm</span></div>
+                      </div>
+                    </div>
+                    <div class="wt-pw-wx-fclabel">
+                      <span>12-HOUR FORECAST</span>
+                      <span class="wt-pw-wx-legend">
+                        <span class="wt-pw-lg wt-pw-lg-temp">Temp</span>
+                        <span class="wt-pw-lg wt-pw-lg-wind">Wind</span>
+                        <span class="wt-pw-lg wt-pw-lg-rain">Rain</span>
+                      </span>
+                    </div>
+                    <svg class="wt-pw-wx-chart" viewBox="0 0 340 96" preserveAspectRatio="none" aria-hidden="true">
+                      <!-- grid -->
+                      <g stroke="#2a2f37" stroke-width="0.5" opacity="0.55">
+                        <line x1="24" y1="8" x2="334" y2="8"/>
+                        <line x1="24" y1="24" x2="334" y2="24"/>
+                        <line x1="24" y1="41" x2="334" y2="41"/>
+                        <line x1="24" y1="57" x2="334" y2="57"/>
+                        <line x1="24" y1="74" x2="334" y2="74"/>
+                      </g>
+                      <!-- y labels -->
+                      <text x="2" y="11" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace">16°</text>
+                      <text x="4" y="77" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace">8°</text>
+                      <!-- rain bars -->
+                      <g fill="#06b6d4" opacity="0.7">
+                        <rect x="127" y="68" width="6" height="6"/>
+                        <rect x="154" y="66" width="6" height="8"/>
+                        <rect x="181" y="70" width="6" height="4"/>
+                      </g>
+                      <!-- wind dashed line -->
+                      <polyline fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3" points="22,63 49,61 76,64 103,62 130,65 157,63 184,66 211,64 237,67 264,63 291,61 318,59"/>
+                      <g fill="#3b82f6">
+                        <path d="M74,61 L78,61 L76,65 Z"/>
+                        <path d="M101,59 L105,59 L103,63 Z"/>
+                        <path d="M128,62 L132,62 L130,66 Z"/>
+                        <path d="M155,60 L159,60 L157,64 Z"/>
+                        <path d="M182,63 L186,63 L184,67 Z"/>
+                        <path d="M209,61 L213,61 L211,65 Z"/>
+                      </g>
+                      <!-- temp line -->
+                      <polyline fill="none" stroke="#ff8800" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" points="22,26 49,33 76,41 103,49 130,57 157,64 184,64 211,72 237,64 264,49 291,33 318,18"/>
+                      <!-- x labels -->
+                      <g fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace">
+                        <text x="22" y="90">22:00</text>
+                        <text x="120" y="90">01:00</text>
+                        <text x="222" y="90">05:00</text>
+                        <text x="318" y="90" text-anchor="end">09:00</text>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Results / Lap Times card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="3">
+                  <div class="wt-pw-card-hdr">
+                    <div class="wt-pw-rtabs">
+                      <span class="wt-pw-rtab wt-pw-rtab-active">Results</span>
+                      <span class="wt-pw-rtab">Lap Times</span>
+                    </div>
+                    <span class="wt-pw-session-dd">Race 3 ▾</span>
+                  </div>
+                  <div class="wt-pw-table-wrap">
+                    <table class="wt-pw-mini-table">
+                      <thead>
+                        <tr><th>Pos</th><th>#</th><th>Driver</th><th>Vehicle</th><th>Laps</th><th>Time</th><th>Best Lap</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr class="wt-pit-srow-item"><td>1</td><td class="wt-pw-no">12</td><td>Ashley Quiddington <span class="wt-pw-state">(VIC)</span></td><td>Sabre 02</td><td>12</td><td class="wt-pw-no">21:01.6629</td><td class="wt-pw-best">1:28.7413</td></tr>
+                        <tr class="wt-pit-srow-item"><td>2</td><td class="wt-pw-no">1</td><td>Andre Curin <span class="wt-pw-state">(VIC)</span></td><td>B Sabre 02</td><td>12</td><td class="wt-pw-no">21:01.7731</td><td class="wt-pw-best">1:28.7100</td></tr>
+                        <tr class="wt-pit-srow-item"><td>3</td><td class="wt-pw-no">11</td><td>Brock Hamilton <span class="wt-pw-state">(VIC)</span></td><td>Sabre 02</td><td>12</td><td class="wt-pw-no">21:02.4410</td><td class="wt-pw-best">1:28.5905</td></tr>
+                        <tr class="wt-pit-srow-item"><td>4</td><td class="wt-pw-no">17</td><td>Ashley Clifford <span class="wt-pw-state">(VIC)</span></td><td>Sabre 02</td><td>12</td><td class="wt-pw-no">21:03.1182</td><td class="wt-pw-best">1:28.2090</td></tr>
+                        <tr class="wt-pit-srow-item"><td>5</td><td class="wt-pw-no">88</td><td>Mallacai Windsor <span class="wt-pw-state">(VIC)</span></td><td>Jacer F2K8 – AKURRA</td><td>12</td><td class="wt-pw-no">21:08.9043</td><td class="wt-pw-best">1:29.7265</td></tr>
+                        <tr class="wt-pit-srow-item"><td>6</td><td class="wt-pw-no">46</td><td>Ayrton Filippi <span class="wt-pw-state">(VIC)</span></td><td>Jacer F2K5 – AKURRA</td><td>12</td><td class="wt-pw-no">21:10.2271</td><td class="wt-pw-best">1:29.8381</td></tr>
+                        <tr class="wt-pit-srow-item"><td>7</td><td class="wt-pw-no">7</td><td>Rob Vile <span class="wt-pw-state">(VIC)</span></td><td>Jacer F2K4 – Heidi</td><td>12</td><td class="wt-pw-no">21:11.5566</td><td class="wt-pw-best">1:29.9101</td></tr>
+                        <tr class="wt-pw-user-row wt-pit-srow-item"><td>13</td><td class="wt-pw-no">76</td><td class="wt-pw-driver-user">Joshua Munro <span class="wt-pw-state">(VIC)</span></td><td>GRD 010</td><td>12</td><td class="wt-pw-no">21:42.3187</td><td class="wt-pw-best">1:31.4936</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
               </div>
-              <div class="channel-row">
-                <span class="channel-label">gLat</span>
-                <span class="channel-val mono" id="glatVal">0.00</span>
-                <span class="channel-label channel-label-mid">gLon</span>
-                <span class="channel-val mono" id="glonVal">0.00</span>
+
+              <!-- RIGHT col: Quick Stats + Best Match -->
+              <div class="wt-pw-col wt-pw-col-right">
+
+                <!-- Quick Stats card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="4">
+                  <div class="wt-pw-card-hdr">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    <span class="wt-pw-card-title">Quick Stats</span>
+                    <span class="wt-pw-session-dd">Race 3 ▾</span>
+                  </div>
+                  <div class="wt-pw-qs-body">
+                    <span class="wt-pw-qs-baseline">Baseline for deltas</span>
+                    <span class="wt-pw-session-dd wt-pw-qs-dd">Race 3 ▾</span>
+                    <div class="wt-pw-qs-main">
+                      <span class="wt-pw-qs-position">P13</span>
+                      <div class="wt-pw-qs-laps">
+                        <div class="wt-pw-qs-row"><span class="wt-pw-qs-label">Best Lap</span><span class="wt-pw-qs-val">1:31.4936</span></div>
+                        <div class="wt-pw-qs-row"><span class="wt-pw-qs-label">Avg Lap</span><span class="wt-pw-qs-val">1:32.570</span></div>
+                      </div>
+                    </div>
+                    <div class="wt-pw-gaps">
+                      <div class="wt-pw-gap wt-pw-gap-ahead">
+                        <span class="wt-pw-gap-arrow">▲</span>
+                        <span class="wt-pw-gap-driver">P12 (VIC)</span>
+                      </div>
+                      <div class="wt-pw-gap wt-pw-gap-behind">
+                        <span class="wt-pw-gap-arrow">▼</span>
+                        <span class="wt-pw-gap-driver">P14 (VIC)</span>
+                      </div>
+                    </div>
+                    <svg class="wt-pw-qs-spark" viewBox="0 0 180 40" preserveAspectRatio="none" aria-hidden="true">
+                      <polyline fill="none" stroke="#ff8800" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" points="4,30 24,22 44,28 64,16 84,23 104,12 124,19 144,11 164,15 176,9"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Best Match card -->
+                <div class="wt-pw-card wt-pit-hist-card-item" data-hcard="5">
+                  <div class="wt-pw-card-hdr">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><polyline points="12 7 12 12 15 14"/></svg>
+                    <span class="wt-pw-card-title">Best Match</span>
+                  </div>
+                  <div class="wt-pw-empty wt-pw-empty-pad">No previous visits at this track</div>
+                </div>
+
+              </div>
+
+            </div><!-- /wt-pw-body -->
+          </div><!-- /wt-pw-panel -->
+        </div>
+
+        <!-- STAGE 1: Setup — FULLY BUILT (default active) -->
+        <div class="wt-stage active" data-stage="setup">
+          <div class="wt-setup-panel">
+            <!-- Title bar -->
+            <div class="wt-setup-titlebar">
+              <span class="wt-setup-title">PRACTICE 2 · PHILLIP ISLAND</span>
+              <span class="wt-setup-saved">Saved</span>
+            </div>
+            <!-- Body: history left + setup right -->
+            <div class="wt-setup-body">
+
+              <!-- LEFT: History at Phillip Island -->
+              <div class="wt-history-col">
+                <div class="wt-history-header">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span class="wt-history-title">History at Phillip Island</span>
+                </div>
+                <div class="wt-history-weather">22°C · Clear</div>
+
+                <!-- Card 1: Top match (green) -->
+                <div class="wt-match-card wt-match-top" id="wtMatchTop">
+                  <div class="wt-match-row1">
+                    <div class="wt-match-left">
+                      <span class="wt-star">★</span>
+                      <span class="wt-match-score wt-score-green">88% match</span>
+                    </div>
+                    <span class="wt-match-date">Mar 2026</span>
+                  </div>
+                  <div class="wt-match-row2">
+                    <span class="wt-match-wx">24°C · Clear</span>
+                    <span class="wt-match-stars">★★★★★</span>
+                  </div>
+                  <div class="wt-match-session">Practice 2</div>
+                  <div class="wt-match-badges">
+                    <span class="wt-badge wt-badge-green">Bal: N</span>
+                    <span class="wt-badge wt-badge-green">Grip: High</span>
+                    <span class="wt-badge wt-badge-green">Stab: Stable</span>
+                  </div>
+                  <button class="wt-copy-btn" id="wtCopyBtn">Copy to Current</button>
+                </div>
+
+                <!-- Card 2: Yellow -->
+                <div class="wt-match-card wt-match-mid">
+                  <div class="wt-match-row1">
+                    <div class="wt-match-left">
+                      <span class="wt-match-score wt-score-yellow">72% match</span>
+                    </div>
+                    <span class="wt-match-date">Feb 2026</span>
+                  </div>
+                  <div class="wt-match-row2">
+                    <span class="wt-match-wx">21°C · Cloudy</span>
+                    <span class="wt-match-stars wt-stars-yellow">★★★★<span class="wt-star-empty">☆</span></span>
+                  </div>
+                  <div class="wt-match-session">Qualifying</div>
+                  <div class="wt-match-badges">
+                    <span class="wt-badge wt-badge-red">Bal: OS</span>
+                    <span class="wt-badge wt-badge-yellow">Grip: Med</span>
+                  </div>
+                </div>
+
+                <!-- Card 3: Grey -->
+                <div class="wt-match-card wt-match-low">
+                  <div class="wt-match-row1">
+                    <div class="wt-match-left">
+                      <span class="wt-match-score wt-score-grey">58% match</span>
+                    </div>
+                    <span class="wt-match-date">Jan 2026</span>
+                  </div>
+                  <div class="wt-match-row2">
+                    <span class="wt-match-wx">18°C · Light rain</span>
+                    <span class="wt-match-stars wt-stars-grey">★★★<span class="wt-star-empty">☆☆</span></span>
+                  </div>
+                  <div class="wt-match-session">Race 1</div>
+                </div>
+
+                <div class="wt-history-more">Show all sessions →</div>
+              </div>
+
+              <!-- RIGHT: Setup sheet -->
+              <div class="wt-setup-col">
+                <!-- Tyres section -->
+                <div class="wt-section-header">
+                  <span class="wt-section-label">TYRES (4)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+
+                <!-- 2x2 corner grid -->
+                <div class="wt-corner-grid">
+                  <!-- FL -->
+                  <div class="wt-corner-cell" id="wt-corner-fl">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">FL</span><span class="wt-corner-name">Front Left</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Pressure</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-fl-psi">27.5</span><span class="wt-metric-unit">psi</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Camber</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-fl-cam">-2.5</span><span class="wt-metric-unit">°</span></div>
+                    </div>
+                  </div>
+                  <!-- FR -->
+                  <div class="wt-corner-cell" id="wt-corner-fr">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">FR</span><span class="wt-corner-name">Front Right</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Pressure</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-fr-psi">27.6</span><span class="wt-metric-unit">psi</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Camber</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-fr-cam">-2.5</span><span class="wt-metric-unit">°</span></div>
+                    </div>
+                  </div>
+                  <!-- RL -->
+                  <div class="wt-corner-cell" id="wt-corner-rl">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">RL</span><span class="wt-corner-name">Rear Left</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Pressure</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-rl-psi">28.0</span><span class="wt-metric-unit">psi</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Camber</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-rl-cam">-1.5</span><span class="wt-metric-unit">°</span></div>
+                    </div>
+                  </div>
+                  <!-- RR -->
+                  <div class="wt-corner-cell" id="wt-corner-rr">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">RR</span><span class="wt-corner-name">Rear Right</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Pressure</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-rr-psi">28.1</span><span class="wt-metric-unit">psi</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Camber</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input" id="wt-rr-cam">-1.5</span><span class="wt-metric-unit">°</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Suspension section (open, 2x2 corner grid) -->
+                <div class="wt-section-header wt-section-collapsed">
+                  <span class="wt-section-label">SUSPENSION (4)</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="wt-corner-grid wt-susp-grid">
+                  <!-- FL -->
+                  <div class="wt-corner-cell">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">FL</span><span class="wt-corner-name">Front Left</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Spring</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">95</span><span class="wt-metric-unit">N/mm</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Damper</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">8</span><span class="wt-metric-unit">clk</span></div>
+                    </div>
+                  </div>
+                  <!-- FR -->
+                  <div class="wt-corner-cell">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">FR</span><span class="wt-corner-name">Front Right</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Spring</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">95</span><span class="wt-metric-unit">N/mm</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Damper</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">8</span><span class="wt-metric-unit">clk</span></div>
+                    </div>
+                  </div>
+                  <!-- RL -->
+                  <div class="wt-corner-cell">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">RL</span><span class="wt-corner-name">Rear Left</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Spring</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">88</span><span class="wt-metric-unit">N/mm</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Damper</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">7</span><span class="wt-metric-unit">clk</span></div>
+                    </div>
+                  </div>
+                  <!-- RR -->
+                  <div class="wt-corner-cell">
+                    <div class="wt-corner-head"><span class="wt-corner-abbr">RR</span><span class="wt-corner-name">Rear Right</span></div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Spring</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">88</span><span class="wt-metric-unit">N/mm</span></div>
+                    </div>
+                    <div class="wt-metric-row">
+                      <span class="wt-metric-label">Damper</span>
+                      <div class="wt-metric-right"><span class="wt-metric-input">7</span><span class="wt-metric-unit">clk</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 2: Correlation -->
+        <div class="wt-stage" data-stage="correlation">
+          <div class="wt-corr-panel">
+            <!-- Title bar -->
+            <div class="wt-corr-titlebar">
+              <span class="wt-corr-title">ANALYTICS · SETUP CORRELATION</span>
+              <div class="wt-corr-toggle">
+                <button class="wt-corr-tog wt-corr-tog-active" aria-pressed="true">This Weekend</button>
+                <button class="wt-corr-tog" aria-pressed="false">Across Events</button>
               </div>
             </div>
-          </div>
+            <!-- Body: 2 columns -->
+            <div class="wt-corr-body">
 
-          <!-- FLOAT top-right: decorative control pills -->
-          <div class="float-card float-controls">
-            <div class="pill-row">
-              <span class="pill">Map</span>
-              <span class="pill">Dark</span>
-              <span class="pill pill-active">Satellite</span>
+              <!-- LEFT: Change / result strips -->
+              <div class="wt-corr-left">
+                <div class="wt-corr-session-label">Practice 1 → Practice 2</div>
+                <!-- Change rows -->
+                <div class="wt-corr-change-row wt-corr-row-item" data-crow="0">
+                  <div class="wt-corr-param">
+                    <span class="wt-corr-param-name">Front tyres</span>
+                    <span class="wt-corr-param-change">+2.0 psi</span>
+                  </div>
+                  <span class="wt-corr-delta wt-corr-delta-fast" id="wtCorrDelta0">−0.34s</span>
+                </div>
+                <div class="wt-corr-change-row wt-corr-row-item" data-crow="1">
+                  <div class="wt-corr-param">
+                    <span class="wt-corr-param-name">Spring rate (R)</span>
+                    <span class="wt-corr-param-change">−5 N/mm</span>
+                  </div>
+                  <span class="wt-corr-delta wt-corr-delta-slow" id="wtCorrDelta1">+0.08s</span>
+                </div>
+                <div class="wt-corr-change-row wt-corr-row-item" data-crow="2">
+                  <div class="wt-corr-param">
+                    <span class="wt-corr-param-name">Brake bias</span>
+                    <span class="wt-corr-param-change">+1.0%</span>
+                  </div>
+                  <span class="wt-corr-delta wt-corr-delta-fast" id="wtCorrDelta2">−0.05s</span>
+                </div>
+                <!-- Feel shift -->
+                <div class="wt-corr-feel">
+                  <span class="wt-corr-feel-label">Balance:</span>
+                  <span class="wt-corr-feel-val">Neutral → slight Understeer</span>
+                </div>
+                <!-- Best lap summary -->
+                <div class="wt-corr-bestlap">
+                  <span class="wt-corr-bl-label">Best lap</span>
+                  <span class="wt-corr-bl-times"><span class="wt-corr-bl-mono">1:39.40</span> → <span class="wt-corr-bl-mono">1:39.10</span></span>
+                  <span class="wt-corr-bl-delta">−0.30s</span>
+                </div>
+              </div>
+
+              <!-- RIGHT: Scatter plot SVG -->
+              <div class="wt-corr-right">
+                <div class="wt-corr-chart-title">Front tyre pressure vs best lap</div>
+                <div class="wt-corr-chart-sub">−2.5 ms per 0.1 bar · High confidence</div>
+                <svg class="wt-corr-scatter" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" id="wtCorrScatter">
+                  <!-- Grid lines -->
+                  <line x1="36" y1="14" x2="248" y2="14" stroke="#1e2128" stroke-dasharray="3,3"/>
+                  <line x1="36" y1="46" x2="248" y2="46" stroke="#1e2128" stroke-dasharray="3,3"/>
+                  <line x1="36" y1="78" x2="248" y2="78" stroke="#1e2128" stroke-dasharray="3,3"/>
+                  <line x1="36" y1="110" x2="248" y2="110" stroke="#1e2128" stroke-dasharray="3,3"/>
+                  <line x1="36" y1="142" x2="248" y2="142" stroke="#1e2128" stroke-dasharray="3,3"/>
+                  <!-- Axes -->
+                  <line x1="36" y1="14" x2="36" y2="142" stroke="#2a2f37"/>
+                  <line x1="36" y1="142" x2="248" y2="142" stroke="#2a2f37"/>
+                  <!-- X axis labels (pressure 26–29 psi) -->
+                  <text x="36" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">26</text>
+                  <text x="107" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">27</text>
+                  <text x="178" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">28</text>
+                  <text x="248" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">29 psi</text>
+                  <!-- Y axis labels (lap time) -->
+                  <text x="32" y="17" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">38.5</text>
+                  <text x="32" y="49" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">39.0</text>
+                  <text x="32" y="81" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">39.5</text>
+                  <text x="32" y="113" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">40.0</text>
+                  <!-- Trend line (dashed orange) -->
+                  <line class="wt-corr-trendline" x1="50" y1="122" x2="238" y2="24" stroke="#ff8800" stroke-width="1.5" stroke-dasharray="5,3" opacity="0"/>
+                  <!-- Scatter dots -->
+                  <circle class="wt-corr-dot" cx="52"  cy="118" r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="65"  cy="112" r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="80"  cy="106" r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="97"  cy="98"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="112" cy="91"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="130" cy="83"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="148" cy="74"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="165" cy="66"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="183" cy="58"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="200" cy="48"  r="3.5" fill="#ff8800" opacity="0"/>
+                  <circle class="wt-corr-dot" cx="220" cy="38"  r="3.5" fill="#ff8800" opacity="0"/>
+                </svg>
+              </div>
+
             </div>
-            <div class="pill-row pill-row-mt">
-              <span class="pill">Chart</span>
-              <span class="pill">G-Force</span>
-              <span class="pill pill-active">Speed</span>
+          </div>
+        </div>
+
+        <!-- STAGE 3: Telemetry — the ENTIRE existing telem-panel UNCHANGED -->
+        <div class="wt-stage" data-stage="telemetry">
+          <div class="telem-panel" id="telemPanel">
+
+            <!-- ── MAP AREA (dominant, 16:9, ~72% panel height) ──────── -->
+            <div class="map-area">
+
+              <!-- satellite image + canvas overlay fills the area -->
+              <div class="map-wrapper" id="mapWrapper">
+                <img id="trackImg" src="assets/track-satellite.png" alt="Calder Park satellite view" />
+                <canvas id="mapCanvas"></canvas>
+              </div>
+
+              <!-- FLOAT top-left: info + live readouts -->
+              <div class="float-card float-info">
+                <div class="float-header">
+                  <span class="float-track-name">CALDER PARK · QUALIFYING</span>
+                  <div class="float-laptime-row">
+                    <span class="live-dot"></span>
+                    <span class="float-lap-mono">LAP 9 · 1:07.783</span>
+                  </div>
+                </div>
+                <div class="float-speed-block">
+                  <span class="speed-value" id="speedVal">000</span>
+                  <span class="speed-unit">km/h</span>
+                </div>
+                <div class="float-channels">
+                  <div class="channel-row">
+                    <span class="channel-label">THROTTLE</span>
+                    <div class="bar-track">
+                      <div class="bar-fill throttle" id="throttleBar" style="width:0%"></div>
+                    </div>
+                    <span class="channel-val green" id="throttleVal">0%</span>
+                  </div>
+                  <div class="channel-row">
+                    <span class="channel-label">BRAKE</span>
+                    <div class="bar-track">
+                      <div class="bar-fill brake" id="brakeBar" style="width:0%"></div>
+                    </div>
+                    <span class="channel-val red" id="brakeVal">0%</span>
+                  </div>
+                  <div class="channel-row">
+                    <span class="channel-label">RPM</span>
+                    <span class="channel-val mono" id="rpmVal">0000</span>
+                  </div>
+                  <div class="channel-row">
+                    <span class="channel-label">gLat</span>
+                    <span class="channel-val mono" id="glatVal">0.00</span>
+                    <span class="channel-label channel-label-mid">gLon</span>
+                    <span class="channel-val mono" id="glonVal">0.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FLOAT top-right: decorative control pills -->
+              <div class="float-card float-controls">
+                <div class="pill-row">
+                  <span class="pill">Map</span>
+                  <span class="pill">Dark</span>
+                  <span class="pill pill-active">Satellite</span>
+                </div>
+                <div class="pill-row pill-row-mt">
+                  <span class="pill">Chart</span>
+                  <span class="pill">G-Force</span>
+                  <span class="pill pill-active">Speed</span>
+                </div>
+              </div>
+
+              <!-- FLOAT bottom-left: G-G diagram -->
+              <div class="float-card float-gg" id="ggInset">
+                <span class="gg-label">G-FORCE</span>
+                <canvas id="ggCanvas"></canvas>
+              </div>
+
+              <!-- FLOAT bottom-right: speed legend -->
+              <div class="float-card float-legend">
+                <span class="legend-title">Speed (kph)</span>
+                <div class="legend-gradient-bar"></div>
+                <div class="legend-range">
+                  <span>67</span>
+                  <span>183</span>
+                </div>
+                <span class="legend-attribution">Imagery © Esri</span>
+              </div>
+
+            </div><!-- /map-area -->
+
+            <!-- ── CHANNEL GRAPH PANEL (~28% height, below map) ─────── -->
+            <div class="graph-panel">
+
+              <!-- tab row -->
+              <div class="graph-tabs">
+                <span class="tab tab-active">Speed</span>
+                <span class="tab">Throttle</span>
+                <span class="tab">Brake</span>
+                <span class="tab">Steering</span>
+                <span class="tab">RPM</span>
+                <span class="tab">G-Force</span>
+                <span class="tab">Corners</span>
+              </div>
+
+              <!-- graph canvas -->
+              <div class="graph-canvas-wrap" id="graphWrap">
+                <canvas id="graphCanvas"></canvas>
+              </div>
+
+              <!-- playback bar -->
+              <div class="playback-bar">
+                <span class="playback-play">&#9654;</span>
+                <span class="playback-speed">1x</span>
+                <div class="scrubber-track" id="scrubberTrack">
+                  <div class="scrubber-fill" id="scrubberFill"></div>
+                  <div class="scrubber-dot" id="scrubberDot"></div>
+                </div>
+                <span class="playback-pct" id="playbackPct">0%</span>
+              </div>
+
+            </div><!-- /graph-panel -->
+
+          </div><!-- /telem-panel -->
+        </div>
+
+        <!-- STAGE 4: Results -->
+        <div class="wt-stage" data-stage="results">
+          <div class="wt-res-panel">
+            <!-- Title bar -->
+            <div class="wt-res-titlebar">
+              <span class="wt-res-title">RESULTS · RACE 1 — FORMULA FORD</span>
+            </div>
+            <!-- Results table -->
+            <div class="wt-res-body">
+              <table class="wt-res-table">
+                <thead>
+                  <tr>
+                    <th>Pos</th>
+                    <th>#</th>
+                    <th>Driver</th>
+                    <th>Laps</th>
+                    <th>Time / Gap</th>
+                    <th>Best Lap</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- P1 — user row -->
+                  <tr class="wt-res-row wt-res-user wt-res-row-item" data-resrow="0">
+                    <td class="wt-res-pos">1</td>
+                    <td class="wt-res-no">76</td>
+                    <td class="wt-res-driver wt-res-driver-user">J. Munro</td>
+                    <td class="wt-res-laps">12</td>
+                    <td class="wt-res-time">1:42.381</td>
+                    <td class="wt-res-best wt-res-fastest">1:38.902</td>
+                    <td class="wt-res-status wt-res-fin">Finished</td>
+                  </tr>
+                  <!-- P2 -->
+                  <tr class="wt-res-row wt-res-even wt-res-row-item" data-resrow="1">
+                    <td class="wt-res-pos">2</td>
+                    <td class="wt-res-no">14</td>
+                    <td class="wt-res-driver">B. Cross</td>
+                    <td class="wt-res-laps">12</td>
+                    <td class="wt-res-time">+1.2s</td>
+                    <td class="wt-res-best">1:39.441</td>
+                    <td class="wt-res-status wt-res-fin">Finished</td>
+                  </tr>
+                  <!-- P3 -->
+                  <tr class="wt-res-row wt-res-row-item" data-resrow="2">
+                    <td class="wt-res-pos">3</td>
+                    <td class="wt-res-no">31</td>
+                    <td class="wt-res-driver">T. Haines</td>
+                    <td class="wt-res-laps">12</td>
+                    <td class="wt-res-time">+3.8s</td>
+                    <td class="wt-res-best">1:39.887</td>
+                    <td class="wt-res-status wt-res-fin">Finished</td>
+                  </tr>
+                  <!-- P4 -->
+                  <tr class="wt-res-row wt-res-even wt-res-row-item" data-resrow="3">
+                    <td class="wt-res-pos">4</td>
+                    <td class="wt-res-no">8</td>
+                    <td class="wt-res-driver">C. Walsh</td>
+                    <td class="wt-res-laps">12</td>
+                    <td class="wt-res-time">+7.4s</td>
+                    <td class="wt-res-best">1:40.214</td>
+                    <td class="wt-res-status wt-res-fin">Finished</td>
+                  </tr>
+                  <!-- P5 -->
+                  <tr class="wt-res-row wt-res-row-item" data-resrow="4">
+                    <td class="wt-res-pos">5</td>
+                    <td class="wt-res-no">55</td>
+                    <td class="wt-res-driver">A. Ryan</td>
+                    <td class="wt-res-laps">12</td>
+                    <td class="wt-res-time">+12.1s</td>
+                    <td class="wt-res-best">1:40.998</td>
+                    <td class="wt-res-status wt-res-fin">Finished</td>
+                  </tr>
+                  <!-- P6 DNF -->
+                  <tr class="wt-res-row wt-res-even wt-res-row-item" data-resrow="5">
+                    <td class="wt-res-pos">6</td>
+                    <td class="wt-res-no">22</td>
+                    <td class="wt-res-driver">M. Ford</td>
+                    <td class="wt-res-laps">8</td>
+                    <td class="wt-res-time">—</td>
+                    <td class="wt-res-best">1:42.017</td>
+                    <td class="wt-res-status wt-res-dnf">DNF</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
+        </div>
 
-          <!-- FLOAT bottom-left: G-G diagram -->
-          <div class="float-card float-gg" id="ggInset">
-            <span class="gg-label">G-FORCE</span>
-            <canvas id="ggCanvas"></canvas>
-          </div>
-
-          <!-- FLOAT bottom-right: speed legend -->
-          <div class="float-card float-legend">
-            <span class="legend-title">Speed (kph)</span>
-            <div class="legend-gradient-bar"></div>
-            <div class="legend-range">
-              <span>67</span>
-              <span>183</span>
-            </div>
-            <span class="legend-attribution">Imagery © Esri</span>
-          </div>
-
-        </div><!-- /map-area -->
-
-        <!-- ── CHANNEL GRAPH PANEL (~28% height, below map) ─────── -->
-        <div class="graph-panel">
-
-          <!-- tab row -->
-          <div class="graph-tabs">
-            <span class="tab tab-active">Speed</span>
-            <span class="tab">Throttle</span>
-            <span class="tab">Brake</span>
-            <span class="tab">Steering</span>
-            <span class="tab">RPM</span>
-            <span class="tab">G-Force</span>
-            <span class="tab">Corners</span>
-          </div>
-
-          <!-- graph canvas -->
-          <div class="graph-canvas-wrap" id="graphWrap">
-            <canvas id="graphCanvas"></canvas>
-          </div>
-
-          <!-- playback bar -->
-          <div class="playback-bar">
-            <span class="playback-play">&#9654;</span>
-            <span class="playback-speed">1x</span>
-            <div class="scrubber-track" id="scrubberTrack">
-              <div class="scrubber-fill" id="scrubberFill"></div>
-              <div class="scrubber-dot" id="scrubberDot"></div>
-            </div>
-            <span class="playback-pct" id="playbackPct">0%</span>
-          </div>
-
-        </div><!-- /graph-panel -->
-
-      </div><!-- /telem-panel -->
+      </div><!-- /wt-stage-wrap -->
     </section>
 
     <div class="page-body">
@@ -174,6 +847,267 @@
         <p>Brings your whole season together — works with</p>
         <div class="strip-sources">
           <span>MoTeC</span><span>AiM</span><span>Natsoft</span><span>Motorsport Australia</span><span>Live weather</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SETUP INTELLIGENCE — flagship differentiator ===== -->
+    <section class="section si-section">
+      <span class="node"></span>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">// Setup intelligence</span>
+          <h2 class="si-h2">Your setups, off paper — and last time, found for you.</h2>
+          <p class="si-sub">No more flipping through folders or guessing what you ran here last year. Motorlytics keeps every setup sheet, then automatically finds your past sessions at this track, in this car, in similar conditions — with the dash data, results and feedback that came with them, and the correlation of what actually found the time.</p>
+        </div>
+
+        <div class="si-rows">
+
+          <!-- ROW 1: Off paper, for good — setup sheet visual -->
+          <div class="row si-row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Setup sheets</span>
+              <h3>Off paper, for good.</h3>
+              <p>Every setup — tyre pressures, camber, springs, fuel — saved and organised. No glovebox notebook, no spreadsheet you can't find.</p>
+              <ul>
+                <li>Corner-by-corner (FL/FR/RL/RR)</li>
+                <li>Templates per category</li>
+                <li>Tyre sets &amp; history</li>
+              </ul>
+            </div>
+            <div class="row-media">
+              <div class="si-setup-panel">
+                <div class="si-setup-titlebar">
+                  <span class="si-setup-title">PRACTICE 2 · PHILLIP ISLAND</span>
+                  <span class="si-setup-saved">Saved</span>
+                </div>
+                <div class="si-setup-col">
+                  <!-- Tyres section -->
+                  <div class="si-section-header">
+                    <span class="si-section-label">TYRES (4)</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                  <div class="si-corner-grid">
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">FL</span><span class="si-corner-name">Front Left</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Pressure</span><div class="si-metric-right"><span class="si-metric-input">27.5</span><span class="si-metric-unit">psi</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Camber</span><div class="si-metric-right"><span class="si-metric-input">-2.5</span><span class="si-metric-unit">°</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">FR</span><span class="si-corner-name">Front Right</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Pressure</span><div class="si-metric-right"><span class="si-metric-input">27.6</span><span class="si-metric-unit">psi</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Camber</span><div class="si-metric-right"><span class="si-metric-input">-2.5</span><span class="si-metric-unit">°</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">RL</span><span class="si-corner-name">Rear Left</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Pressure</span><div class="si-metric-right"><span class="si-metric-input">28.0</span><span class="si-metric-unit">psi</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Camber</span><div class="si-metric-right"><span class="si-metric-input">-1.5</span><span class="si-metric-unit">°</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">RR</span><span class="si-corner-name">Rear Right</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Pressure</span><div class="si-metric-right"><span class="si-metric-input">28.1</span><span class="si-metric-unit">psi</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Camber</span><div class="si-metric-right"><span class="si-metric-input">-1.5</span><span class="si-metric-unit">°</span></div></div>
+                    </div>
+                  </div>
+                  <!-- Suspension section -->
+                  <div class="si-section-header si-section-collapsed">
+                    <span class="si-section-label">SUSPENSION (4)</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                  <div class="si-corner-grid si-susp-grid">
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">FL</span><span class="si-corner-name">Front Left</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Spring</span><div class="si-metric-right"><span class="si-metric-input">95</span><span class="si-metric-unit">N/mm</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Damper</span><div class="si-metric-right"><span class="si-metric-input">8</span><span class="si-metric-unit">clk</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">FR</span><span class="si-corner-name">Front Right</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Spring</span><div class="si-metric-right"><span class="si-metric-input">95</span><span class="si-metric-unit">N/mm</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Damper</span><div class="si-metric-right"><span class="si-metric-input">8</span><span class="si-metric-unit">clk</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">RL</span><span class="si-corner-name">Rear Left</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Spring</span><div class="si-metric-right"><span class="si-metric-input">88</span><span class="si-metric-unit">N/mm</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Damper</span><div class="si-metric-right"><span class="si-metric-input">7</span><span class="si-metric-unit">clk</span></div></div>
+                    </div>
+                    <div class="si-corner-cell">
+                      <div class="si-corner-head"><span class="si-corner-abbr">RR</span><span class="si-corner-name">Rear Right</span></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Spring</span><div class="si-metric-right"><span class="si-metric-input">88</span><span class="si-metric-unit">N/mm</span></div></div>
+                      <div class="si-metric-row"><span class="si-metric-label">Damper</span><div class="si-metric-right"><span class="si-metric-input">7</span><span class="si-metric-unit">clk</span></div></div>
+                    </div>
+                  </div>
+                  <!-- Fuel & Aero section -->
+                  <div class="si-section-header si-section-collapsed">
+                    <span class="si-section-label">FUEL &amp; AERO (3)</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B5B9BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                  <div class="si-single-rows">
+                    <div class="si-metric-row si-single-row"><span class="si-metric-label">Fuel load</span><div class="si-metric-right"><span class="si-metric-input">32</span><span class="si-metric-unit">L</span></div></div>
+                    <div class="si-metric-row si-single-row"><span class="si-metric-label">Front wing</span><div class="si-metric-right"><span class="si-metric-input">4</span><span class="si-metric-unit">°</span></div></div>
+                    <div class="si-metric-row si-single-row"><span class="si-metric-label">Diff preload</span><div class="si-metric-right"><span class="si-metric-input">40</span><span class="si-metric-unit">Nm</span></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROW 2: Last time, found for you — reference match panel -->
+          <div class="row si-row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Reference sessions</span>
+              <h3>Last time — found for you.</h3>
+              <p>Roll into a track and Motorlytics surfaces your past sessions there, same car, ranked by how close the weather is to today. You see what you ran last time without searching for it.</p>
+              <ul>
+                <li>Ranked by weather match</li>
+                <li>Same track &amp; car</li>
+                <li>One-click "Copy to current"</li>
+              </ul>
+            </div>
+            <div class="row-media">
+              <div class="si-setup-panel">
+                <div class="si-setup-titlebar">
+                  <span class="si-setup-title">PRACTICE 2 · PHILLIP ISLAND</span>
+                  <span class="si-setup-saved">Saved</span>
+                </div>
+                <div class="si-history-col">
+                  <div class="si-history-header">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span class="si-history-title">History at Phillip Island</span>
+                  </div>
+                  <div class="si-history-weather">22°C · Clear</div>
+
+                  <!-- Card 1: Top match -->
+                  <div class="si-match-card si-match-top">
+                    <div class="si-match-row1">
+                      <div class="si-match-left"><span class="si-star">★</span><span class="si-match-score si-score-green">88% match</span></div>
+                      <span class="si-match-date">Mar 2026</span>
+                    </div>
+                    <div class="si-match-row2"><span class="si-match-wx">24°C · Clear</span><span class="si-match-stars">★★★★★</span></div>
+                    <div class="si-match-session">Practice 2</div>
+                    <div class="si-match-badges">
+                      <span class="si-badge si-badge-green">Bal: N</span>
+                      <span class="si-badge si-badge-green">Grip: High</span>
+                      <span class="si-badge si-badge-green">Stab: Stable</span>
+                    </div>
+                    <button class="si-copy-btn">Copy to Current</button>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div class="si-match-card si-match-mid">
+                    <div class="si-match-row1">
+                      <div class="si-match-left"><span class="si-match-score si-score-yellow">72% match</span></div>
+                      <span class="si-match-date">Feb 2026</span>
+                    </div>
+                    <div class="si-match-row2"><span class="si-match-wx">21°C · Cloudy</span><span class="si-match-stars si-stars-yellow">★★★★<span class="si-star-empty">☆</span></span></div>
+                    <div class="si-match-session">Qualifying</div>
+                    <div class="si-match-badges">
+                      <span class="si-badge si-badge-red">Bal: OS</span>
+                      <span class="si-badge si-badge-yellow">Grip: Med</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div class="si-match-card si-match-low">
+                    <div class="si-match-row1">
+                      <div class="si-match-left"><span class="si-match-score si-score-grey">58% match</span></div>
+                      <span class="si-match-date">Jan 2026</span>
+                    </div>
+                    <div class="si-match-row2"><span class="si-match-wx">18°C · Light rain</span><span class="si-match-stars si-stars-grey">★★★<span class="si-star-empty">☆☆</span></span></div>
+                    <div class="si-match-session">Race 1</div>
+                  </div>
+
+                  <div class="si-history-more">Show all sessions →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROW 3: And what made it fast — correlation visual -->
+          <div class="row si-row reveal">
+            <div class="row-text">
+              <span class="eyebrow">// Correlation</span>
+              <h3>And what actually made it fast.</h3>
+              <p>Every match brings its dash data, lap times and your own feedback — plus the correlation that shows which change found the time, so you copy what worked, not what you hope works.</p>
+              <ul>
+                <li>Setup change → lap-time delta</li>
+                <li>Per-parameter impact</li>
+                <li>This weekend or across events</li>
+              </ul>
+            </div>
+            <div class="row-media">
+              <div class="si-corr-panel">
+                <div class="si-corr-titlebar">
+                  <span class="si-corr-title">ANALYTICS · SETUP CORRELATION</span>
+                  <div class="si-corr-toggle">
+                    <button class="si-corr-tog si-corr-tog-active" aria-pressed="true">This Weekend</button>
+                    <button class="si-corr-tog" aria-pressed="false">Across Events</button>
+                  </div>
+                </div>
+                <div class="si-corr-body">
+                  <!-- LEFT: change/result strips -->
+                  <div class="si-corr-left">
+                    <div class="si-corr-session-label">Practice 1 → Practice 2</div>
+                    <div class="si-corr-change-row">
+                      <div class="si-corr-param"><span class="si-corr-param-name">Front tyres</span><span class="si-corr-param-change">+2.0 psi</span></div>
+                      <span class="si-corr-delta si-corr-delta-fast">−0.34s</span>
+                    </div>
+                    <div class="si-corr-change-row">
+                      <div class="si-corr-param"><span class="si-corr-param-name">Spring rate (R)</span><span class="si-corr-param-change">−5 N/mm</span></div>
+                      <span class="si-corr-delta si-corr-delta-slow">+0.08s</span>
+                    </div>
+                    <div class="si-corr-change-row">
+                      <div class="si-corr-param"><span class="si-corr-param-name">Brake bias</span><span class="si-corr-param-change">+1.0%</span></div>
+                      <span class="si-corr-delta si-corr-delta-fast">−0.05s</span>
+                    </div>
+                    <div class="si-corr-feel">
+                      <span class="si-corr-feel-label">Balance:</span>
+                      <span class="si-corr-feel-val">Neutral → slight Understeer</span>
+                    </div>
+                    <div class="si-corr-bestlap">
+                      <span class="si-corr-bl-label">Best lap</span>
+                      <span class="si-corr-bl-times"><span class="si-corr-bl-mono">1:39.40</span> → <span class="si-corr-bl-mono">1:39.10</span></span>
+                      <span class="si-corr-bl-delta">−0.30s</span>
+                    </div>
+                  </div>
+                  <!-- RIGHT: scatter -->
+                  <div class="si-corr-right">
+                    <div class="si-corr-chart-title">Front tyre pressure vs best lap</div>
+                    <div class="si-corr-chart-sub">−2.5 ms per 0.1 bar · High confidence</div>
+                    <svg class="si-corr-scatter" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <line x1="36" y1="14" x2="248" y2="14" stroke="#1e2128" stroke-dasharray="3,3"/>
+                      <line x1="36" y1="46" x2="248" y2="46" stroke="#1e2128" stroke-dasharray="3,3"/>
+                      <line x1="36" y1="78" x2="248" y2="78" stroke="#1e2128" stroke-dasharray="3,3"/>
+                      <line x1="36" y1="110" x2="248" y2="110" stroke="#1e2128" stroke-dasharray="3,3"/>
+                      <line x1="36" y1="142" x2="248" y2="142" stroke="#1e2128" stroke-dasharray="3,3"/>
+                      <line x1="36" y1="14" x2="36" y2="142" stroke="#2a2f37"/>
+                      <line x1="36" y1="142" x2="248" y2="142" stroke="#2a2f37"/>
+                      <text x="36" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">26</text>
+                      <text x="107" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">27</text>
+                      <text x="178" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">28</text>
+                      <text x="248" y="154" fill="#7a7f87" font-size="8" font-family="'JetBrains Mono',monospace" text-anchor="middle">29 psi</text>
+                      <text x="32" y="17" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">38.5</text>
+                      <text x="32" y="49" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">39.0</text>
+                      <text x="32" y="81" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">39.5</text>
+                      <text x="32" y="113" fill="#7a7f87" font-size="7" font-family="'JetBrains Mono',monospace" text-anchor="end">40.0</text>
+                      <line class="si-corr-trendline" x1="50" y1="122" x2="238" y2="24" stroke="#ff8800" stroke-width="1.5" stroke-dasharray="5,3"/>
+                      <circle class="si-corr-dot" cx="52"  cy="118" r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="65"  cy="112" r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="80"  cy="106" r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="97"  cy="98"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="112" cy="91"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="130" cy="83"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="148" cy="74"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="165" cy="66"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="183" cy="58"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="200" cy="48"  r="3.5" fill="#ff8800"/>
+                      <circle class="si-corr-dot" cx="220" cy="38"  r="3.5" fill="#ff8800"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1025,6 +1959,7 @@
           <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-a-3">Who owns my data?</button><div class="faq-a" id="faq-a-3"><p>You do. Your telemetry, setups and results stay yours.</p></div></div>
           <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-a-4">How does the free trial work?</button><div class="faq-a" id="faq-a-4"><p>14 days free, then $15/month. Cancel anytime.</p></div></div>
           <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-a-5">What categories is it for?</button><div class="faq-a" id="faq-a-5"><p>Built for grassroots Australian motorsport — any car, any category. Australian circuits are seeded out of the box.</p></div></div>
+          <div class="faq-item"><button class="faq-q" aria-expanded="false" aria-controls="faq-a-6">How does Motorlytics know which past setup to show me?</button><div class="faq-a" id="faq-a-6"><p>It looks at your previous sessions at the same track in the same car, then ranks them by how similar the weather is to right now — temperature, conditions, humidity and wind — so the closest match to today's conditions surfaces first, with its setup, lap times and your feedback attached.</p></div></div>
         </div>
       </div>
     </section>
