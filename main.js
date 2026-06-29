@@ -430,3 +430,300 @@ if (!reduce) {
     }
   }
 })();
+
+// =====================================================================
+// DEEP-DIVE COMPONENT ANIMATIONS — add .in-view when scrolled into view
+// =====================================================================
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ddEls = document.querySelectorAll('.dd-telem, .dd-car');
+  if (!ddEls.length) return;
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    ddEls.forEach((el) => el.classList.add('in-view'));
+    return;
+  }
+
+  const ddIo = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        ddIo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  ddEls.forEach((el) => ddIo.observe(el));
+})();
+
+// =====================================================================
+// WALKTHROUGH HERO CONTROLLER
+// =====================================================================
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const STAGES = ['pitwall', 'setup', 'correlation', 'telemetry', 'results'];
+  const CAPTIONS = {
+    pitwall:     'Roll into the weekend prepared.',
+    setup:       'Log your setup — and see what was fast in weather like today.',
+    correlation: 'Know exactly which change found the time.',
+    telemetry:   'Then go deep on every lap.',
+    results:     'And see where it put you.',
+  };
+
+  // Default active = index 1 (setup) — already set in HTML via .active class
+  let currentStageIdx = 1;
+  let autoTimer = null;
+  let isPaused = false;
+
+  const stageWrap  = document.getElementById('wtStageWrap');
+  const captionEl  = document.getElementById('wtCaption');
+  const replayBtn  = document.getElementById('wtReplay');
+  const dots       = Array.from(document.querySelectorAll('.wt-dot'));
+  const stageEls   = stageWrap
+    ? Array.from(stageWrap.querySelectorAll('.wt-stage'))
+    : [];
+
+  if (!stageWrap || !stageEls.length) return;
+
+  // ── Go to a stage ─────────────────────────────────────────────────
+  function goToStage(idx) {
+    // Clamp
+    idx = ((idx % STAGES.length) + STAGES.length) % STAGES.length;
+    if (idx === currentStageIdx) return;
+
+    // Swap stages
+    stageEls[currentStageIdx].classList.remove('active');
+    stageEls[idx].classList.add('active');
+    currentStageIdx = idx;
+
+    // Update dots
+    dots.forEach((d, i) => {
+      const di = parseInt(d.getAttribute('data-wt-stage'), 10);
+      if (di === idx) {
+        d.classList.add('wt-dot-active');
+      } else {
+        d.classList.remove('wt-dot-active');
+      }
+    });
+
+    // Update caption
+    const key = STAGES[idx];
+    if (captionEl) captionEl.textContent = CAPTIONS[key] || '';
+
+    // Fire resize so telemetry canvas refits when it becomes visible
+    // Use rAF to ensure the DOM has settled after the stage becomes position:relative
+    if (key === 'telemetry') {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.dispatchEvent(new Event('resize'));
+        });
+      });
+    } else {
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    // Per-stage entrance animation
+    if (!reduceMotion) {
+      if (key === 'setup')       triggerSetupAnimation();
+      if (key === 'pitwall')     triggerPitwallAnimation();
+      if (key === 'correlation') triggerCorrelationAnimation();
+      if (key === 'results')     triggerResultsAnimation();
+    }
+  }
+
+  // ── Pit wall stage entrance animation ────────────────────────────
+  let pitWtCountdownInterval = null;
+  let pitWtTimers = [];
+
+  function triggerPitwallAnimation() {
+    // Clear previous
+    clearInterval(pitWtCountdownInterval);
+    pitWtTimers.forEach(clearTimeout);
+    pitWtTimers = [];
+
+    // Reset session rows + history cards
+    document.querySelectorAll('[data-stage="pitwall"] .wt-pit-srow-item')
+      .forEach((r) => r.classList.remove('wt-pit-srow-visible'));
+    document.querySelectorAll('[data-stage="pitwall"] .wt-pit-hist-card-item')
+      .forEach((c) => c.classList.remove('wt-pit-hcard-visible'));
+
+    // (No countdown timer — this event has no upcoming session.)
+
+    // Stagger-reveal session rows
+    const srows = Array.from(document.querySelectorAll('[data-stage="pitwall"] .wt-pit-srow-item'));
+    srows.forEach((row, i) => {
+      const t = setTimeout(() => row.classList.add('wt-pit-srow-visible'), i * 110 + 100);
+      pitWtTimers.push(t);
+    });
+
+    // Stagger-reveal history cards
+    const hcards = Array.from(document.querySelectorAll('[data-stage="pitwall"] .wt-pit-hist-card-item'));
+    hcards.forEach((card, i) => {
+      const t = setTimeout(() => card.classList.add('wt-pit-hcard-visible'), i * 180 + 300);
+      pitWtTimers.push(t);
+    });
+  }
+
+  // ── Correlation stage entrance animation ──────────────────────────
+  let corrTimers = [];
+
+  function triggerCorrelationAnimation() {
+    // Clear previous
+    corrTimers.forEach(clearTimeout);
+    corrTimers = [];
+
+    // Reset change rows
+    document.querySelectorAll('[data-stage="correlation"] .wt-corr-row-item')
+      .forEach((r) => r.classList.remove('wt-corr-row-visible'));
+    document.querySelectorAll('[data-stage="correlation"] .wt-corr-feel')
+      .forEach((el) => el.classList.remove('wt-corr-row-visible'));
+    document.querySelectorAll('[data-stage="correlation"] .wt-corr-bestlap')
+      .forEach((el) => el.classList.remove('wt-corr-row-visible'));
+
+    // Reset scatter dots + trendline
+    document.querySelectorAll('#wtCorrScatter .wt-corr-dot')
+      .forEach((d) => { d.style.opacity = '0'; });
+    const trendline = document.querySelector('#wtCorrScatter .wt-corr-trendline');
+    if (trendline) trendline.style.opacity = '0';
+
+    // Stagger change rows
+    const crows = Array.from(document.querySelectorAll('[data-stage="correlation"] .wt-corr-row-item'));
+    crows.forEach((row, i) => {
+      const t = setTimeout(() => row.classList.add('wt-corr-row-visible'), i * 140 + 80);
+      corrTimers.push(t);
+    });
+
+    // Feel and bestlap lines
+    const feel = document.querySelector('[data-stage="correlation"] .wt-corr-feel');
+    const bestlap = document.querySelector('[data-stage="correlation"] .wt-corr-bestlap');
+    const feelT = setTimeout(() => { if (feel) feel.classList.add('wt-corr-row-visible'); }, 600);
+    const blT   = setTimeout(() => { if (bestlap) bestlap.classList.add('wt-corr-row-visible'); }, 800);
+    corrTimers.push(feelT, blT);
+
+    // Fade in scatter dots one by one
+    const dots = Array.from(document.querySelectorAll('#wtCorrScatter .wt-corr-dot'));
+    dots.forEach((dot, i) => {
+      const t = setTimeout(() => { dot.style.opacity = '1'; }, i * 60 + 200);
+      corrTimers.push(t);
+    });
+
+    // Fade in trendline after dots
+    const tlT = setTimeout(() => {
+      if (trendline) trendline.style.opacity = '1';
+    }, dots.length * 60 + 350);
+    corrTimers.push(tlT);
+  }
+
+  // ── Results stage entrance animation ──────────────────────────────
+  let resWtTimers = [];
+
+  function triggerResultsAnimation() {
+    resWtTimers.forEach(clearTimeout);
+    resWtTimers = [];
+
+    // Reset rows
+    document.querySelectorAll('[data-stage="results"] .wt-res-row-item')
+      .forEach((r) => r.classList.remove('wt-res-row-visible'));
+
+    // Stagger rows in
+    const rows = Array.from(document.querySelectorAll('[data-stage="results"] .wt-res-row-item'));
+    rows.forEach((row, i) => {
+      const t = setTimeout(() => row.classList.add('wt-res-row-visible'), i * 110 + 80);
+      resWtTimers.push(t);
+    });
+  }
+
+  // ── Setup stage entrance animation ────────────────────────────────
+  function triggerSetupAnimation() {
+    const copyBtn = document.getElementById('wtCopyBtn');
+    const inputs  = document.querySelectorAll('[data-stage="setup"] .wt-corner-grid:first-of-type .wt-metric-input');
+
+    // Pulse copy button after 300ms
+    if (copyBtn) {
+      setTimeout(() => {
+        copyBtn.classList.remove('wt-pulsing');
+        void copyBtn.offsetWidth; // reflow
+        copyBtn.classList.add('wt-pulsing');
+        // After pulse, flash the corner inputs
+        setTimeout(() => {
+          inputs.forEach((inp, i) => {
+            setTimeout(() => {
+              inp.classList.remove('wt-flashing');
+              void inp.offsetWidth;
+              inp.classList.add('wt-flashing');
+            }, i * 80);
+          });
+        }, 700);
+      }, 300);
+    }
+  }
+
+  // ── Auto-advance ──────────────────────────────────────────────────
+  function startAuto() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      goToStage(currentStageIdx + 1);
+      startAuto();
+    }, 4500);
+  }
+
+  function stopAuto() {
+    clearTimeout(autoTimer);
+    autoTimer = null;
+  }
+
+  function togglePause() {
+    isPaused = !isPaused;
+    if (isPaused) {
+      stopAuto();
+      // Show play icon
+      if (replayBtn) replayBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>';
+      if (replayBtn) replayBtn.setAttribute('aria-label', 'Resume auto-advance');
+    } else {
+      // Show pause icon
+      if (replayBtn) replayBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+      if (replayBtn) replayBtn.setAttribute('aria-label', 'Pause auto-advance');
+      startAuto();
+    }
+  }
+
+  // ── Wire dots ─────────────────────────────────────────────────────
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-wt-stage'), 10);
+      goToStage(idx);
+      // Reset timer on manual click
+      if (!isPaused) {
+        stopAuto();
+        startAuto();
+      }
+    });
+  });
+
+  // ── Replay/pause button ───────────────────────────────────────────
+  if (replayBtn) {
+    replayBtn.addEventListener('click', togglePause);
+  }
+
+  // ── Hover pause/resume on the stage wrap ─────────────────────────
+  if (stageWrap) {
+    stageWrap.addEventListener('mouseenter', () => {
+      if (!isPaused) stopAuto();
+    });
+    stageWrap.addEventListener('mouseleave', () => {
+      if (!isPaused) startAuto();
+    });
+  }
+
+  // ── Reduced motion: no auto-advance, no entrance animation ───────
+  if (reduceMotion) {
+    // Just make sure setup (idx 1) is active and caption is set
+    captionEl && (captionEl.textContent = CAPTIONS['setup']);
+    return; // exit — no auto-advance
+  }
+
+  // ── Start auto-advance ────────────────────────────────────────────
+  startAuto();
+
+})();
