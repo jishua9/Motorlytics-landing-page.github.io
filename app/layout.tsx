@@ -1,6 +1,14 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Outfit, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+
+// Umami analytics (self-hosted). Baked at build time from repo Variables;
+// the script only renders once both are set, so analytics stays off until
+// the backend is up. NEXT_PUBLIC_UMAMI_SRC should point at the renamed
+// tracker on a neutral first-party subdomain (see analytics/README.md).
+const umamiSrc = process.env.NEXT_PUBLIC_UMAMI_SRC
+const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
 
 // Same 3 Google fonts + CSS variables as the Motorlytics app.
 const outfit = Outfit({
@@ -39,7 +47,17 @@ export default function RootLayout({
       data-theme="dark"
       className={`scroll-smooth ${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        {umamiSrc && umamiWebsiteId && (
+          <Script
+            src={umamiSrc}
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+            defer
+          />
+        )}
+      </body>
     </html>
   )
 }

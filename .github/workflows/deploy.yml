@@ -34,6 +34,12 @@ jobs:
 
       - name: Build (static export)
         run: npm run build
+        env:
+          # Set these as repo Variables (Settings -> Secrets and variables ->
+          # Actions -> Variables) to switch on Umami analytics. Left unset =
+          # no tracking script is emitted.
+          NEXT_PUBLIC_UMAMI_SRC: ${{ vars.NEXT_PUBLIC_UMAMI_SRC }}
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
