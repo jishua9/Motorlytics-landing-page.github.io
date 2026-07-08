@@ -1,0 +1,418 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:is(.dark *));
+
+/* Motorlytics Dark Theme (Primary) */
+:root {
+  /* Brand & Accents - base theme variables (prefixed with theme-) */
+  --theme-primary: #ff8800;
+  --theme-primary-light: #e0a057;
+  --theme-primary-dark: rgba(255, 87, 51, 0.2);
+
+  /* Backgrounds & Surfaces */
+  --theme-background: #0D1117;
+  --theme-grid: #0D1117;
+  --theme-grid-sub: #1b2129;
+  --theme-grid-title: #010409;
+
+  /* Text Hierarchy */
+  --theme-text-select: #F5F5F6;
+  --theme-text: #B5B9BD;
+  --theme-text-sub: #9d9d9d;
+
+  /* UI Elements */
+  --theme-secondary: #E8E8E8;
+  --theme-secondary-light: #C8C8C8;
+  --theme-secondary-dark: #686868;
+
+  /* Status Colors */
+  --theme-success: #4CAF50;
+  --theme-error: #FF5252;
+  --theme-warning: #FF9800;
+
+  /* F1 Timing Colors */
+  --theme-fastest: #A855F7;   /* Purple - overall fastest */
+  --theme-improved: #00ff41;  /* Green - personal best */
+  --theme-slower: #FF5252;    /* Red - slower */
+  --theme-invalid: #757575;   /* Grey - invalid */
+
+  /* Badge/Tag Colors - for discipline badges, status indicators */
+  --badge-blue: #60a5fa;
+  --badge-orange: #fb923c;
+  --badge-green: #4ade80;
+  --badge-purple: #a78bfa;
+  --badge-pink: #f472b6;
+  --badge-cyan: #22d3ee;
+  --badge-amber: #fbbf24;
+  --badge-red: #f87171;
+  --badge-ma: #00E5FF;  /* MA event cyan - bright for dark mode */
+
+  /* Card header gradient */
+  --gradient-card-header-from: #010409;
+  --gradient-card-header-to: #0a0d12;
+
+  /* Primary button foreground */
+  --theme-primary-foreground: #010409;
+
+  /* Chart colors */
+  --chart-grid: #1e2128;
+  --chart-grid-light: #2d3139;
+  --chart-axis: #7a7f87;
+  --chart-tooltip-bg: #0d1117;
+  --chart-tooltip-border: #2d3139;
+  --chart-tooltip-text: #f0f6fc;
+  --chart-tooltip-label: #7a7f87;
+
+  /* Body gradient */
+  --body-gradient: linear-gradient(135deg, #0D1117 0%, #161B22 50%, #0D1117 100%);
+
+  /* Shadcn overrides - Motorlytics Theme Mapping */
+  --background: transparent;
+  --foreground: var(--theme-text);
+  --card: var(--theme-grid);
+  --card-foreground: var(--theme-text);
+  --popover: var(--theme-grid-sub);
+  --popover-foreground: var(--theme-text);
+  --primary: var(--theme-primary);
+  --primary-foreground: var(--theme-grid-title);
+  --secondary: var(--theme-grid-sub);
+  --secondary-foreground: var(--theme-text);
+  --muted: var(--theme-grid-sub);
+  --muted-foreground: var(--theme-text-sub);
+  --accent: var(--theme-primary-dark);
+  --accent-foreground: var(--theme-primary);
+  --destructive: var(--theme-error);
+  --destructive-foreground: var(--theme-text-select);
+  --border: var(--theme-secondary-dark);
+  --input: var(--theme-grid-sub);
+  --ring: var(--theme-primary);
+  --radius: 0.75rem;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: var(--theme-grid);
+  --sidebar-foreground: var(--theme-text);
+  --sidebar-primary: var(--theme-primary);
+  --sidebar-primary-foreground: var(--theme-grid-title);
+  --sidebar-accent: var(--theme-grid-sub);
+  --sidebar-accent-foreground: var(--theme-text);
+  --sidebar-border: var(--theme-secondary-dark);
+  --sidebar-ring: var(--theme-primary);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  /* Brand - keep orange consistent */
+  --theme-primary: #ff8800;
+  --theme-primary-light: #ffad4d;
+  --theme-primary-dark: rgba(255, 136, 0, 0.12);
+  --theme-primary-foreground: #ffffff;
+
+  /* Backgrounds */
+  --theme-background: #f5f7fa;
+  --theme-grid: #ffffff;
+  --theme-grid-sub: #e5e7eb;
+  --theme-grid-title: #d1d5db;
+
+  /* Card header gradient */
+  --gradient-card-header-from: #e9ecef;
+  --gradient-card-header-to: #dee2e6;
+
+  /* Text */
+  --theme-text-select: #1a1d21;
+  --theme-text: #495057;
+  --theme-text-sub: #6c757d;
+
+  /* UI Elements */
+  --theme-secondary: #e9ecef;
+  --theme-secondary-light: #f8f9fa;
+  --theme-secondary-dark: #ced4da;
+
+  /* Status colors - darker for contrast on light bg */
+  --theme-success: #2e7d32;
+  --theme-error: #d32f2f;
+  --theme-warning: #ed6c02;
+
+  /* Timing colors - darker for contrast */
+  --theme-fastest: #7c3aed;
+  --theme-improved: #16a34a;
+  --theme-slower: #dc2626;
+  --theme-invalid: #9ca3af;
+
+  /* Badge/Tag Colors - darker for light mode */
+  --badge-blue: #2563eb;
+  --badge-orange: #ea580c;
+  --badge-green: #16a34a;
+  --badge-purple: #7c3aed;
+  --badge-pink: #db2777;
+  --badge-cyan: #0891b2;
+  --badge-amber: #d97706;
+  --badge-red: #dc2626;
+  --badge-ma: #0891b2;  /* MA event cyan - darker for light mode readability */
+
+  /* Chart colors */
+  --chart-grid: #e5e7eb;
+  --chart-grid-light: #d1d5db;
+  --chart-axis: #6b7280;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-border: #d1d5db;
+  --chart-tooltip-text: #1f2937;
+  --chart-tooltip-label: #6b7280;
+
+  /* Body gradient */
+  --body-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 50%, #f5f7fa 100%);
+
+  /* Shadcn overrides for light mode */
+  --background: transparent;
+  --foreground: var(--theme-text);
+  --card: var(--theme-grid);
+  --card-foreground: var(--theme-text);
+  --popover: var(--theme-grid);
+  --popover-foreground: var(--theme-text);
+  --primary: var(--theme-primary);
+  --primary-foreground: var(--theme-primary-foreground);
+  --secondary: var(--theme-grid-sub);
+  --secondary-foreground: var(--theme-text);
+  --muted: var(--theme-grid-sub);
+  --muted-foreground: var(--theme-text-sub);
+  --accent: var(--theme-primary-dark);
+  --accent-foreground: var(--theme-primary);
+  --destructive: var(--theme-error);
+  --destructive-foreground: #ffffff;
+  --border: var(--theme-secondary-dark);
+  --input: var(--theme-grid-sub);
+  --ring: var(--theme-primary);
+  --sidebar: var(--theme-grid);
+  --sidebar-foreground: var(--theme-text);
+  --sidebar-primary: var(--theme-primary);
+  --sidebar-primary-foreground: var(--theme-primary-foreground);
+  --sidebar-accent: var(--theme-grid-sub);
+  --sidebar-accent-foreground: var(--theme-text);
+  --sidebar-border: var(--theme-secondary-dark);
+  --sidebar-ring: var(--theme-primary);
+}
+
+body {
+  font-family: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Typography Scale */
+.text-data-lg { font-size: 2rem; }
+.text-data-md { font-size: 1.5rem; }
+.text-data-sm { font-size: 1rem; }
+
+/* Font utility classes */
+.font-heading,
+.font-\[Outfit\] {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono), ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+}
+
+@theme inline {
+  /* Font Families */
+  --font-sans: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+  --font-outfit: var(--font-outfit), 'Outfit', sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Motorlytics custom colors - reference theme-aware base variables */
+  --color-grid: var(--theme-grid);
+  --color-grid-sub: var(--theme-grid-sub);
+  --color-grid-title: var(--theme-grid-title);
+  --color-text: var(--theme-text);
+  --color-text-select: var(--theme-text-select);
+  --color-text-sub: var(--theme-text-sub);
+  --color-secondary-dark: var(--theme-secondary-dark);
+  --color-primary-light: var(--theme-primary-light);
+  --color-primary-foreground: var(--theme-primary-foreground);
+  
+  /* Typography sizes */
+  --font-size-4xl: 6.3rem;
+  --text-4xl: 6.3rem;
+
+  /* F1 Timing Colors - reference theme-aware base variables */
+  --color-fastest: var(--theme-fastest);
+  --color-improved: var(--theme-improved);
+  --color-slower: var(--theme-slower);
+  --color-invalid: var(--theme-invalid);
+
+  --color-gradient-card-header-from: var(--gradient-card-header-from);
+  --color-gradient-card-header-to: var(--gradient-card-header-to);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-grid-light: var(--chart-grid-light);
+  --color-chart-axis: var(--chart-axis);
+  --color-chart-tooltip-bg: var(--chart-tooltip-bg);
+  --color-chart-tooltip-border: var(--chart-tooltip-border);
+  --color-chart-tooltip-text: var(--chart-tooltip-text);
+
+  /* Badge colors - theme-aware */
+  --color-badge-blue: var(--badge-blue);
+  --color-badge-orange: var(--badge-orange);
+  --color-badge-green: var(--badge-green);
+  --color-badge-purple: var(--badge-purple);
+  --color-badge-pink: var(--badge-pink);
+  --color-badge-cyan: var(--badge-cyan);
+  --color-badge-amber: var(--badge-amber);
+  --color-badge-red: var(--badge-red);
+  --color-badge-ma: var(--badge-ma);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply text-foreground;
+    background: var(--body-gradient);
+    background-attachment: fixed;
+  }
+}
+
+/* Custom Scrollbar Styles */
+@layer utilities {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-secondary-dark) transparent;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary-dark);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary);
+  }
+
+  /* Number input spinner styling */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .bg-card-header {
+    background: linear-gradient(to bottom, var(--gradient-card-header-from), var(--gradient-card-header-to));
+  }
+
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+/* Leaflet tooltip for lap identification on colored track lines */
+.lap-tooltip {
+  background: var(--color-grid) !important;
+  border: 1px solid var(--color-secondary-dark) !important;
+  color: var(--color-text-main) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.lap-tooltip::before {
+  border-top-color: var(--color-secondary-dark) !important;
+}
