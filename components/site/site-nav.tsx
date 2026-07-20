@@ -59,6 +59,12 @@ export function SiteNav() {
           <a href="/about" className="transition-colors hover:text-text-select">
             About
           </a>
+          <a
+            href="https://docs.motorlytics.com.au"
+            className="transition-colors hover:text-text-select"
+          >
+            Docs
+          </a>
         </nav>
 
         <div className="flex items-center gap-3">

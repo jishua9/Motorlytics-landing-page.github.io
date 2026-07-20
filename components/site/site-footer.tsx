@@ -2,6 +2,7 @@ const FOOTER_LINKS = [
   { label: 'Features', href: '/features' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
+  { label: 'Docs', href: 'https://docs.motorlytics.com.au' },
   { label: 'Sign in', href: 'https://app.motorlytics.com.au/login' },
 ]
 
