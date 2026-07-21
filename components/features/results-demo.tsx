@@ -11,12 +11,20 @@ const noop = () => {}
  */
 export function ResultsDemo() {
   return (
-    <LapTimesTable
-      lapTimes={mockLapTimes}
-      userRaceNumber={mockUserLapNumber}
-      onImportClick={noop}
-      onManualClick={noop}
-      onEditClick={noop}
-    />
+    // The real component lays a flex-1 chart beside a fixed 192px legend, so on
+    // a phone the chart is squeezed to zero width and only the axis labels show.
+    // Give it a floor and let the panel scroll sideways rather than render an
+    // invisible chart.
+    <div className="overflow-x-auto">
+      <div className="min-w-[760px]">
+        <LapTimesTable
+          lapTimes={mockLapTimes}
+          userRaceNumber={mockUserLapNumber}
+          onImportClick={noop}
+          onManualClick={noop}
+          onEditClick={noop}
+        />
+      </div>
+    </div>
   )
 }

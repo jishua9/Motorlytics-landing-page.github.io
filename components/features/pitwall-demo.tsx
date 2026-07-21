@@ -87,7 +87,7 @@ export function PitwallDemo() {
   return (
     <div className="overflow-hidden rounded-xl border border-secondary-dark bg-background shadow-2xl">
       {/* Title bar */}
-      <div className="bg-card-header flex items-center justify-between border-b border-secondary-dark px-5 py-3">
+      <div className="bg-card-header flex flex-col gap-3 border-b border-secondary-dark px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div>
           <p className="font-[Outfit] font-semibold text-text-select">
             Phillip Island Grand Prix Circuit
@@ -96,7 +96,7 @@ export function PitwallDemo() {
             Winter Series Round 4 · Formula Ford · #7
           </p>
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex shrink-0 flex-col items-start sm:items-end">
           <span className="text-sm text-text-sub">Race 1 starts in</span>
           <p className="font-mono text-3xl font-bold tabular-nums leading-none text-text-select">
             24:10
@@ -105,14 +105,14 @@ export function PitwallDemo() {
       </div>
 
       {/* Tab bar */}
-      <div className="flex gap-6 border-b border-secondary-dark px-5">
+      <div className="hide-scrollbar flex gap-6 overflow-x-auto border-b border-secondary-dark px-5">
         {TABS.map((tab) => {
           const Icon = tab.icon
           const active = tab.id === 'dashboard'
           return (
             <div
               key={tab.id}
-              className={`-mb-px flex items-center gap-2 border-b-2 py-3 text-sm font-medium ${
+              className={`-mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-2 py-3 text-sm font-medium ${
                 active
                   ? 'border-primary text-primary'
                   : 'border-transparent text-text-sub'
