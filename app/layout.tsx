@@ -48,6 +48,15 @@ export default function RootLayout({
       className={`scroll-smooth ${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="font-sans">
+        {/*
+          Scroll reveals are driven by motion, which server-renders its start
+          state as an inline opacity:0. With JavaScript disabled that never
+          animates in, so the page below the fold would read as blank. This
+          only applies when JS is off, where we simply want everything shown.
+        */}
+        <noscript>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         {children}
         {umamiSrc && umamiWebsiteId && (
           <Script
