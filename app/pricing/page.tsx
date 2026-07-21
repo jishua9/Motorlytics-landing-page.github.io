@@ -4,6 +4,7 @@ import { PricingCard } from '@/components/site/pricing-card'
 import { Reveal } from '@/components/story/reveal'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/pricing/' },
   title: 'Pricing · Motorlytics',
   description:
     'One plan, everything included. $15/month AUD with a 14 day free trial. No feature gates, cancel anytime.',
