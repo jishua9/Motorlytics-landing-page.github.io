@@ -3,6 +3,7 @@ import { PageShell } from '@/components/site/page-shell'
 import { Reveal } from '@/components/story/reveal'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/about/' },
   title: 'About · Motorlytics',
   description:
     'Motorlytics is built in Australia for grassroots and club motorsport. The tools the pros take for granted, for the racers who do it for the love of it.',

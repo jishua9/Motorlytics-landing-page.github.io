@@ -11,6 +11,7 @@ import { EventsCard } from '@/components/features/events-card'
 import { WeatherPanelDemo } from '@/components/features/weather-panel-demo'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/features/' },
   title: 'Features · Motorlytics',
   description:
     'Pit wall, setup sheets, MoTeC and AiM telemetry, weather matched insights, results and running costs. Everything your race weekend needs in one place.',
