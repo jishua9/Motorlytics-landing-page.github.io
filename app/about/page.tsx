@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'Motorlytics is built in Australia for grassroots and club motorsport. The tools the pros take for granted, for the racers who do it for the love of it.',
 }
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 const PRINCIPLES = [
   {

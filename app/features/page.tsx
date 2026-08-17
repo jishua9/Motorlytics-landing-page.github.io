@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'Pit wall, setup sheets, MoTeC and AiM telemetry, weather matched insights, results and running costs. Everything your race weekend needs in one place.',
 }
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 const TRACKS = [
   'Mount Panorama',

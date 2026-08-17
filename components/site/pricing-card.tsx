@@ -1,4 +1,4 @@
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 const PLAN_INCLUDES = [
   'Unlimited events, sessions & cars',

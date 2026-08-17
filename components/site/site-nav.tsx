@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, useScroll, useSpring } from 'motion/react'
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 /**
  * Sticky top bar. Goes from transparent over the hero to a solid, blurred

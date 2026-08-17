@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     'One plan, everything included. $15/month AUD with a 14 day free trial. No feature gates, cancel anytime.',
 }
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 const INCLUDES = [
   'Unlimited events, sessions and cars',

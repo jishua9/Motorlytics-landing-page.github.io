@@ -4,7 +4,7 @@ import { Reveal } from './reveal'
 import { SiteFooter } from '@/components/site/site-footer'
 import { PricingCard } from '@/components/site/pricing-card'
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 const PILLARS = [
   {

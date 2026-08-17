@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'motion/react'
 
-const APP_URL = 'https://app.motorlytics.com.au/register'
+const APP_URL = 'https://app.motorlytics.com.au/signup'
 
 /**
  * Opening frame of the story. Poster-style (no charts) so it paints instantly.
