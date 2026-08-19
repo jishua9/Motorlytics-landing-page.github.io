@@ -51,7 +51,7 @@ export function SiteFooter() {
       </div>
       <div className="mx-auto mt-8 flex max-w-6xl flex-col gap-3 px-6 text-xs text-text-sub sm:flex-row sm:items-center sm:justify-between">
         <span>
-          © 2026 Munro Motorsports · Built in Australia for grassroots &amp;
+          © 2026 Motorlytics · Built in Australia for grassroots &amp;
           club motorsport
         </span>
         <nav className="flex flex-wrap gap-x-5 gap-y-2">
