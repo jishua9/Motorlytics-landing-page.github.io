@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/pricing/' },
   title: 'Pricing · Motorlytics',
   description:
-    'One plan, everything included. $15/month AUD with a 14 day free trial. No feature gates, cancel anytime.',
+    'One plan, everything included. $30/month AUD or $300/year, with a 14 day free trial. No feature gates, cancel anytime.',
 }
 
 const APP_URL = 'https://app.motorlytics.com.au/signup'
@@ -31,8 +31,12 @@ const FAQ = [
     a: 'Yes, 14 days, and no card is charged during the trial. If it’s not for you, cancel before it ends and you won’t pay a cent.',
   },
   {
-    q: 'What does the $15 get me?',
+    q: 'What does the $30 get me?',
     a: 'Everything. There’s a single plan with no feature gates. Telemetry, weather insights, results, setup sheets and the pit wall are all included.',
+  },
+  {
+    q: 'Is there a yearly plan?',
+    a: 'Yes, $300 a year, which is two months free compared with paying monthly. Choose it at checkout, or switch from your account at any time.',
   },
   {
     q: 'Can I cancel anytime?',
@@ -74,8 +78,8 @@ export default function PricingPage() {
             One plan. Everything in it.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-text-sub">
-            No tiers, no add ons, no feature gates. $15 a month, or start free for
-            two weeks.
+            No tiers, no add ons, no feature gates. $30 a month or $300 a year, and
+            your first two weeks are free.
           </p>
         </div>
       </section>

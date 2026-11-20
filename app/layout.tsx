@@ -87,7 +87,7 @@ const structuredData = {
       description: SITE_DESCRIPTION,
       offers: {
         '@type': 'Offer',
-        price: '15.00',
+        price: '30.00',
         priceCurrency: 'AUD',
         description: 'One plan, everything included, with a 14 day free trial.',
       },

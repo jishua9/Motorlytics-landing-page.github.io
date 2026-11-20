@@ -17,11 +17,14 @@ export function PricingCard({ includes = PLAN_INCLUDES }: { includes?: string[] 
         </p>
         <div className="mt-3 flex items-baseline justify-center gap-1">
           <span className="font-[Outfit] text-5xl font-bold text-text-select">
-            $15
+            $30
           </span>
           <span className="text-text-sub">/ month AUD</span>
         </div>
-        <p className="mt-2 text-xs text-text-sub">
+        <p className="mt-2 text-sm text-text-main">
+          or $300 a year, two months free
+        </p>
+        <p className="mt-1 text-xs text-text-sub">
           Start with a 14 day free trial
         </p>
       </div>

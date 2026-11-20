@@ -108,7 +108,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.34 }}
           className="mt-4 text-xs text-text-sub"
         >
-          $15/month after trial · no card tricks · cancel anytime
+          $30/month after trial · no card tricks · cancel anytime
         </motion.p>
       </div>
 
