@@ -190,6 +190,18 @@ img,svg{display:block;max-width:100%}
 @media (max-width:860px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}
   .tile--feature{grid-column:auto;grid-row:auto}}
 
+/* ============ CONDENSED DIFFERENTIATOR + OVERVIEW LINK ============ */
+.diff-3up{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.diff-item svg{width:26px;height:26px;stroke:var(--primary);fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.diff-item h3{font-size:1.05rem;font-weight:700;margin-top:12px}
+.diff-item p{color:var(--text);font-size:.92rem;margin-top:6px}
+.section-link{text-align:center;margin-top:36px}
+.section-link a{color:var(--primary);font-family:var(--font-mono);font-weight:600;
+  font-size:.9rem;letter-spacing:.3px}
+.section-link a:hover{text-decoration:underline}
+@media (max-width:720px){.diff-3up{grid-template-columns:1fr;gap:20px}}
+
 /* ====================== DEEP-DIVE ROWS ====================== */
 .rows{display:flex;flex-direction:column;gap:72px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -4623,3 +4635,58 @@ h2, h3 { letter-spacing: -0.3px; }
 .si-corr-chart-title { font-family: 'Outfit', sans-serif; font-size: .78rem; font-weight: 600; color: #B5B9BD; }
 .si-corr-chart-sub { font-size: .68rem; color: #9d9d9d; margin-bottom: 4px; }
 .si-corr-scatter { width: 100%; max-height: 200px; height: 200px; display: block; background: #0D1117; border-radius: 6px; }
+
+/* ====================== FEATURES PAGE ====================== */
+/* Shared alt-section background */
+.sec-alt{background:#0a0d12;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* 1) Feature breakdown grid */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:26px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.feat-card:hover{border-color:rgba(255,136,0,.45);box-shadow:var(--glow);transform:translateY(-3px)}
+.feat-card .ico{width:42px;height:42px;border-radius:var(--radius-sm);
+  background:rgba(255,136,0,.12);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat-card .ico svg{width:22px;height:22px;stroke:var(--primary);fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.feat-card h3{font-size:1.15rem;font-weight:700}
+.feat-card ul{list-style:none;margin-top:14px}
+.feat-card li{padding:6px 0 6px 22px;position:relative;color:var(--text);font-size:.9rem;line-height:1.45}
+.feat-card li::before{content:"›";position:absolute;left:0;color:var(--primary);font-weight:700}
+@media (max-width:860px){.feat-grid{grid-template-columns:1fr}}
+
+/* 2) Supported devices & formats */
+.dev-group{margin-top:36px}
+.dev-group:first-of-type{margin-top:0}
+.dev-group-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--primary);margin-bottom:16px}
+.dev-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.dev-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--primary);
+  border-radius:var(--radius-sm);padding:22px 24px}
+.dev-card .dev-name{font-family:var(--font-head);font-weight:700;font-size:1.25rem;color:var(--text-strong)}
+.dev-card .dev-sub{color:var(--text-muted);font-size:.85rem;margin-top:4px}
+.dev-note{color:var(--text-muted);font-size:.88rem;margin-top:18px;max-width:640px}
+@media (max-width:560px){.dev-cards{grid-template-columns:1fr}}
+
+/* 3) Track list */
+.trk-state{margin-top:44px}
+.trk-state:first-of-type{margin-top:0}
+.trk-state-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--primary);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.trk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.trk-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px}
+.trk-venue{font-family:var(--font-head);font-weight:700;font-size:1.02rem;color:var(--text-strong)}
+.trk-loc{color:var(--text-muted);font-size:.8rem;margin-top:2px}
+.trk-card.is-closed .trk-venue{color:var(--text-muted)}
+.trk-closed{display:inline-block;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.5px;
+  text-transform:uppercase;color:#9d9d9d;border:1px solid var(--border-strong);border-radius:4px;
+  padding:1px 6px;margin-left:8px;vertical-align:middle}
+.trk-layouts{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.trk-layout{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.85rem}
+.trk-layout-name{color:var(--text)}
+.trk-layout-spec{font-size:.78rem;color:var(--text-strong);white-space:nowrap}
+.trk-note{text-align:center;color:var(--text-muted);font-size:.85rem;margin-top:36px}
+@media (max-width:700px){.trk-grid{grid-template-columns:1fr}}
+
+/* Active nav link (Features page) */
+.nav-links a[aria-current="page"]{color:var(--primary)}
