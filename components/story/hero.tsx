@@ -55,9 +55,12 @@ export function Hero() {
           Built for grassroots &amp; club motorsport
         </motion.div>
 
+        {/* The headline is the largest paint. It starts visible and only
+            slides, so phones show it before the motion script has loaded
+            (a fade from 0 held it back to 5.9 s LCP on mobile). */}
         <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduce ? false : { y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           className="font-[Outfit] text-4xl font-semibold leading-[1.08] tracking-tight text-text-select sm:text-6xl"
         >
